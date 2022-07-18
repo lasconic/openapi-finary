@@ -1,0 +1,18 @@
+type: object
+properties:
+  correlation_id:
+    type: string
+  name:
+    type: string
+  symbol:
+    type: string
+  currency:
+    $ref: "./CurrencyAdvanced.yaml"
+  type:
+    type: string
+required:
+- correlation_id
+- name
+- symbol
+- currency
+- type

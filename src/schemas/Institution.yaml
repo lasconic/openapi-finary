@@ -1,0 +1,35 @@
+type: object
+properties:
+  id:
+    type: string
+  slug:
+    type: string
+  name:
+    type: string
+  countries:
+    type: array
+    items:
+      type: string
+  twitter_handle:
+    type: string
+    nullable: true
+  logo_url:
+    type: string
+    nullable: true
+  is_available:
+    type: boolean
+  is_requestable:
+    type: boolean
+  providers:
+    type: array
+    items:
+      $ref: "./InstitutionProvider.yaml"
+required:
+  - id
+  - slug
+  - name
+  - countries
+  - is_requestable
+
+
+

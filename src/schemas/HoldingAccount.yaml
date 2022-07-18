@@ -1,0 +1,66 @@
+type: object
+properties:
+  slug:
+    type: string
+  id:
+    type: string
+  name:
+    type: string
+  manual_type:
+    type: string
+    nullable: true
+  connection_id:
+    type: string
+  connection_state:
+    type: string
+    nullable: true
+  last_sync_at:
+    type: string
+  last_sync:
+    type: string
+  currency:
+    $ref: "./Currency.yaml"
+  display_currency:
+    $ref: "./Currency.yaml"
+  annual_yield:
+    type: number
+    nullable: true
+  balance:
+    type: number
+  display_balance:
+    type: number
+  transactions_count:
+    type: integer
+  bank_account_type:
+    $ref: "./BankAccountType.yaml"
+  upnl:
+    type: number
+    nullable: true
+  display_upnl:
+    type: number
+    nullable: true
+  upnl_percent:
+    type: number
+    nullable: true
+  unrealized_pnl:
+    type: number
+    nullable: true
+  display_unrealized_pnl:
+    type: number
+    nullable: true
+  unrealized_pnl_percent:
+    type: number
+    nullable: true
+required:
+  - slug
+  - id
+  - name
+  - connection_id
+  - last_sync_at
+  - last_sync
+  - currency
+  - display_currency
+  - annual_yield
+  - balance
+  - display_balance
+  - transactions_count

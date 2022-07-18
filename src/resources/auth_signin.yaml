@@ -1,0 +1,57 @@
+post:
+  operationId: signin
+  tags:
+    - general
+  summary: Authenticate the user
+  description: Authenticate the user
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../schemas/LoginInfo.yaml"
+  security: []
+  responses:
+    "201":
+      description: Success. A JSON object representing the user
+      headers:
+        Set-Cookie:
+          schema:
+            type: string
+            example: finary_access_token=abcde12345
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/BaseResponse.yaml"
+              - type: object
+                properties:
+                  result:
+                    type: object
+                    properties:
+                      user:
+                        $ref: "../schemas/User.yaml"
+                      access_token_expiry:
+                        type: integer
+                      refresh_token_expiry:
+                        type: integer
+                    required:
+                    - user
+                    - access_token_expiry
+                    - refresh_token_expiry
+    "202":
+      description: Success, but 2FA is needed. A JSON object with necessary info
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/BaseResponse.yaml"
+              - type: object
+                properties:
+                  result:
+                    type: object
+                    properties:
+                      otp_relay_token:
+                        type: string
+                    required:
+                      - otp_relay_token

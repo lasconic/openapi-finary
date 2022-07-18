@@ -1,0 +1,21 @@
+type: object
+properties:
+  id:
+    type: string
+  community_id:
+    type: integer
+  name:
+    type: string
+  native_token_id:
+    type: string
+  logo_url:
+    type: string
+  wrapped_token_id:
+    type: string
+required:
+  - id
+  - community_id
+  - name
+  - native_token_id
+  - logo_url
+  - wrapped_token_id

@@ -1,0 +1,22 @@
+get:
+  operationId: get_scpis
+  tags:
+    - general
+  summary: Search scpis in Finary Database
+  description: Search scpis in Finary Database
+  parameters:
+    - $ref: "../parameters/Query.yaml"
+  responses:
+    "200":
+      description: Success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/BaseResponse.yaml"
+              - type: object
+                properties:
+                  result:
+                    type: array
+                    items:
+                      $ref: "../schemas/SCPI.yaml"

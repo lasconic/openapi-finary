@@ -1,0 +1,22 @@
+get:
+  operationId: get_precious_metals
+  tags:
+    - general
+  summary: Search precious metal in Finary database
+  description: Search precious metal in Finary database
+  parameters:
+    - $ref: "../parameters/Query.yaml"
+  responses:
+    "200":
+      description: Success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/BaseResponse.yaml"
+              - type: object
+                properties:
+                  result:
+                    type: array
+                    items:
+                      $ref: "../schemas/PreciousMetal.yaml"

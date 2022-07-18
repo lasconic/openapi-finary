@@ -1,0 +1,22 @@
+get:
+  operationId: get_user_institutions
+  tags:
+    - user
+  summary: Search institution with given name, also among user created ones?
+  description: Search institution with given name, also among user created ones?
+  parameters:
+    - $ref: "../parameters/Name.yaml"
+  responses:
+    "200":
+      description: Success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/BaseResponse.yaml"
+              - type: object
+                properties:
+                  result:
+                    type: array
+                    items:
+                      $ref: "../schemas/Institution.yaml"

@@ -1,0 +1,45 @@
+type: object
+properties:
+  id:
+    type: integer
+  code:
+    type: string
+  name:
+    type: string
+  symbol:
+    type: string
+  currency_type:
+    type: string
+  created_at:
+    type: string
+  updated_at:
+    type: string
+  rank:
+    type: integer
+  correlation_id:
+    type: string
+  is_stable:
+    type: boolean
+  data_provider:
+    type: string
+  current_price:
+    type: string
+  currency_type_terminal:
+    type: string
+  external_logo_url:
+    type: string
+required:
+- id
+- code
+- name
+- symbol
+- currency_type
+- created_at
+- updated_at
+- rank
+- correlation_id
+- is_stable
+- data_provider
+- current_price
+- currency_type_terminal
+- external_logo_url

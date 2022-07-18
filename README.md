@@ -1,34 +1,42 @@
 <h1 align="center">
   <div style="display:inline-block;vertical-align: middle;">
-      <img src="docs/header.png" width="550"/>
+      <img src="" width="550"/>
   </div>
 </h1>
 
-![build](https://github.com/dgarcia360/openapi-boilerplate/workflows/build/badge.svg)
+![build](https://github.com/lasconic/openapi-finary/workflows/build/badge.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-# OpenAPI boilerplate
 
-A starter template for **OpenAPI Specification** (OAS) projects.
 
-This project splits the [Swagger Petstore](https://petstore.swagger.io/) example from the official documentation into smaller files. It also adds handy commands to build, lint, and preview the OpenAPI document from the terminal.
+## End goals
 
-You can use this template to guide the organization of your project. Either if you want to create a new OpenAPI document from scratch or if you already have it defined. 
 
-## Features
+* Automated linting
+* Online Documentation 
+* Generate SDKs for a few languages (Python at least)
 
-* 📝 Write OpenAPI definitions in different files.
-* 🔀 Combine all files with [APIDevTools/swagger-cli](https://github.com/APIDevTools/swagger-cli).
-* ✅ Validate and lint the OpenAPI document with [stoplight/spectral](https://github.com/stoplight/spectral).
-* ✨ Publish reference docs with [redocly/redoc](https://github.com/Redocly/redoc) & GitHub Pages.
 
-## Why?
+## Development tips:
 
-When I used to document APIs following the OpenAPI spec, I always ended up with documents of thousands of lines, which were a nightmare to maintain.
+* Useful tools to create schemas from data
+https://www.liquid-technologies.com/online-json-to-schema-converter
+https://json2yaml.com/
+All in one ? https://github.com/swaggest/json-cli
 
-For this reason, I explored how to split OpenAPI documents. Jump over to my [blog](https://davidgarcia.dev/posts/how-to-split-open-api-spec-into-multiple-files/) to learn more about the process. Based on my research, I created this opinionated template to define, test, and publish modular OpenAPI projects.
 
-Properly organizing your project comes with great advantages. By splitting a large OpenAPI spec into multiple files, it will not only be much easier to handle. Documenting it will be much more enjoyable, too. I also regularly get the feedback that other developers are more willing to contribute and propose changes to the document with this structure.
+* Generate Python SDK 
+Tested with openapi-generator 6.0.1 and swagger-cli 3.0.34 
+$ openapi-generator generate -i ../finary_api2/openapi/finary.yaml -g python -o codegen2 --skip-validate-spec
+
+In my tests, the authentification doesn't work well... I choose to instantiate a client, signin, 
+get the cookies from the Set-Cookie header and injects them in a second client for the other calls.
+**To be investigated**
+
+
+## TODO
+In resources/user_institution_connections.yaml, we need crypto account description
+
 
 ## Getting started
 
@@ -41,7 +49,7 @@ Properly organizing your project comes with great advantages. By splitting a lar
 1. Clone the repository.
 
     ```
-    git clone https://github.com/dgarcia360/openapi-boilerplate.git
+    git clone https://github.com/lasconic/openapi-finary.git
     ```
 
 2. Install the project dependencies.
@@ -85,7 +93,7 @@ npm run preview
 The server starts on http://127.0.0.1:8080.
 
 The site is generated with [ReDoc](https://github.com/Redocly/redoc).
-Here's a preview of a site generated with this command: [Swagger Petstore Reference Documentation](https://dgarcia360.github.io/openapi-boilerplate/).
+Here's a preview of a site generated with this command: [Finary API reference documentation](https://lasconic.github.io/openapi-finary/).
 
 ## Ready-to-use workflows
 
@@ -100,12 +108,10 @@ See `.github/workflows` to customize the available workflows. If you don't plan 
 ## Contributing
 
 Contributions are welcome and appreciated! 
-If you want to enhance the boilerplate, please read [CONTRIBUTING.md](CONTRIBUTING.md) file first.
+If you want to enhance the specification, please read [CONTRIBUTING.md](CONTRIBUTING.md) file first.
 
 ## License
 
-Copyright (c) 2019-present David Garcia ([@dgarcia360](https://davidgarcia.dev)). Licensed under the [MIT License](LICENSE.md).
-
-The PetStore example used is derived from [OAI/OpenAPI-Specification](https://github.com/OAI/OpenAPI-Specification/blob/master/examples/v3.0/petstore.yaml), Copyright The Linux Foundation, Licensed under the [Apache License, Version 2.0](https://github.com/OAI/OpenAPI-Specification/blob/master/LICENSE).
+Copyright (c) 2019-present David Garcia ([@dgarcia360](https://davidgarcia.dev)), @lasconic. Licensed under the [MIT License](LICENSE.md).
 
 

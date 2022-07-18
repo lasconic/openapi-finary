@@ -1,0 +1,20 @@
+get:
+  operationId: get_generic_asset_categories
+  tags:
+    - general
+  summary: Get the generic asset categories
+  description: Get the generic asset categories used to populate the dropbox in the generic asset UI.
+  responses:
+    "200":
+      description: Success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/BaseResponse.yaml"
+              - type: object
+                properties:
+                  result:
+                    type: array
+                    items:
+                      $ref: "../schemas/GenericAssetCategory.yaml"

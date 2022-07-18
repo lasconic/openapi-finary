@@ -1,0 +1,30 @@
+type: object
+properties:
+  id:
+    type: integer
+  name:
+    type: string
+  international_name:
+    type: string
+    nullable: true
+  image_url:
+    type: string
+    nullable: true
+  updated_at:
+    type: string
+  current_price:
+    type: number
+  display_current_price:
+    type: number
+  currency:
+    $ref: "./Currency.yaml"
+  display_currency:
+    $ref: "./Currency.yaml"
+required:
+  - id
+  - name
+  - updated_at
+  - current_price
+  - display_current_price
+  - currency
+  - display_currency

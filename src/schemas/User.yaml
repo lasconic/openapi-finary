@@ -1,0 +1,207 @@
+type: object
+properties:
+  slug:
+    type: string
+  firstname:
+    type: "string"
+    nullable: true
+  lastname:
+    type: string
+    nullable: true
+  email:
+    type: string
+  push_token:
+    type: string
+    nullable: true
+  subscription_current_period_end_at:
+    type: string
+    nullable: true
+  subscription_cancel_at:
+    type: string
+    nullable: true
+  subscription_renewal_period:
+    type: string
+    nullable: true
+  subscription_price_without_tax:
+    type: integer
+    nullable: true
+  subscription_status:
+    type: string
+    nullable: true
+  birthdate:
+    type: string
+    nullable: true
+  is_otp_enabled:
+    type: boolean
+    nullable: true
+  is_beta_tester:
+    type: boolean
+    nullable: true
+  last_user_sync_triggered_at:
+    type: string
+    nullable: true
+  last_user_sync_at:
+    type: string
+    nullable: true
+  last_asset_updated_at:
+    type: string
+    nullable: true
+  referral_id:
+    type: string
+    nullable: true
+  created_at:
+    type: string
+  registration_platform:
+    type: string
+    nullable: true
+  newsletter_subscribed:
+    type: boolean
+    nullable: true
+  webapp_emails_subscribed:
+    type: boolean
+    nullable: true
+  is_crowdfunding_open:
+    type: boolean
+    nullable: true
+  is_crowdfunding_preregistered:
+    type: boolean
+    nullable: true
+  referral_status:
+    type: string
+    nullable: true
+  net_monthly_salary:
+    type: string
+    nullable: true
+  finary_investor_status:
+    type: string
+    nullable: true
+  age:
+    type: string
+    nullable: true
+  is_free_trial_available:
+    type: boolean
+    nullable: true
+  onboarding_steps:
+    type: array
+    items:
+      type: object
+      properties:
+        step:
+          type: string
+        state:
+          type: string
+      required:
+      - step
+      - state
+  is_onboarding_completed:
+    type: boolean
+    nullable: true
+  is_active:
+    type: boolean
+    nullable: true
+  crypto_exchange_requests:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+        crypto_exchange_slug:
+          type: string
+      required:
+      - id
+      - crypto_exchange_slug
+  investor_profile:
+    type: object
+    properties:
+      has_clicked_opportunities:
+        type: boolean
+      monthly_expenses:
+        type: number
+      annual_salary:
+        type: number
+      income_tax_rate:
+        type: number
+    required:
+    - has_clicked_opportunities
+    - monthly_expenses
+    - annual_salary
+    - income_tax_rate
+  ui_configuration:
+    type: object
+    properties:
+      information_banner_seen_version:
+        type: integer
+      wealth_display_mode:
+        type: string
+      display_language:
+        type: string
+      display_new_webapp_modal:
+        type: boolean
+      konami_code:
+        type: string
+        nullable: true
+      is_crypto_currency_display_enabled:
+        type: boolean
+      has_seen_free_referral_modal:
+        type: boolean
+      has_seen_download_app_modal:
+        type: boolean
+      financial_projection_parameters:
+        type: object
+        properties:
+          duration:
+            type: string
+          monthly_contribution:
+            type: string
+        required:
+        - duration
+        - monthly_contribution
+      has_filled_invest_form:
+        type: boolean
+      period_display_mode:
+        type: string
+      display_currency:
+        type: object
+        properties:
+          id:
+            type: integer
+          name:
+            type: string
+          code:
+            type: string
+          symbol:
+            type: string
+          correlation_id:
+            type: string
+          logo_url:
+            type: string
+        required:
+        - id
+        - name
+        - code
+        - symbol
+        - correlation_id
+        - logo_url
+    required:
+    - information_banner_seen_version
+    - wealth_display_mode
+    - display_language
+    - display_new_webapp_modal
+    - is_crypto_currency_display_enabled
+    - has_seen_free_referral_modal
+    - has_seen_download_app_modal
+    - financial_projection_parameters
+    - has_filled_invest_form
+    - period_display_mode
+    - display_currency
+  devices:
+    type: array
+    items: {}
+  has_bi_account:
+    type: boolean
+    nullable: true
+required:
+- slug
+- email
+- created_at

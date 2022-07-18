@@ -1,0 +1,20 @@
+get:
+  operationId: get_crypto_chains
+  tags:
+    - general
+  summary: Get the supported crypto chains
+  description: Get the supported crypto chains that can be used when a user enters his wallet adress
+  responses:
+    "200":
+      description: Success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/BaseResponse.yaml"
+              - type: object
+                properties:
+                  result:
+                    type: array
+                    items:
+                      $ref: "../schemas/CryptoChain.yaml"

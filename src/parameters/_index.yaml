@@ -1,7 +1,8 @@
-# path
-petId:
-  $ref: './path/petId.yaml'
-
-# limit
-limit:
-  $ref: './query/limit.yaml'
+BankAccountType:
+  $ref: "./BankAccountType.yaml"
+CurrencyType:
+  $ref: "./CurrencyType.yaml"
+Query:
+  $ref: "./Query.yaml"
+Name:
+  $ref: "./Name.yaml"

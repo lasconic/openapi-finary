@@ -1,7 +1,7 @@
 {
-  "name": "openapi-boilerplate",
-  "version": "0.1.1",
-  "description": "Multi-file boilerplate for Open API Specification.",
+  "name": "openapi-finary",
+  "version": "0.1.0",
+  "description": "Open API Specification for Finary API.",
   "main": "index.js",
   "scripts": {
     "build": "swagger-cli bundle src/openapi.yaml --outfile _build/openapi.yaml --type yaml",
@@ -13,13 +13,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dgarcia360/openapi-boilerplate.git"
+    "url": "git+https://github.com/lasconic/openapi-finary.git"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dgarcia360/openapi-boilerplate/issues"
+    "url": "https://github.com/lasconic/openapi-finary/issues"
   },
-  "homepage": "https://github.com/dgarcia360/openapi-boilerplate#readme",
+  "homepage": "https://github.com/lasconic/openapi-finary#readme",
   "dependencies": {
     "@apidevtools/swagger-cli": "^4.0.4",
     "@stoplight/spectral": "^6.1.0",

@@ -1,0 +1,12 @@
+type: object
+properties:
+  email:
+    type: string
+  password:
+    type: string
+  device_id:
+    type: string
+required:
+- email
+- password
+- device_id

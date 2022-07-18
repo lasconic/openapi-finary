@@ -1,0 +1,9 @@
+type: object
+properties:
+  name:
+    type: string
+  correlation_id:
+    type: string
+required:
+  - name
+  - correlation_id

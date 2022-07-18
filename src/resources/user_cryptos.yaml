@@ -1,0 +1,20 @@
+get:
+  operationId: get_user_cryptos
+  tags:
+    - user
+  summary: Get logged in user cryptos
+  description: Get logged in user cryptos
+  responses:
+    "200":
+      description: Success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/BaseResponse.yaml"
+              - type: object
+                properties:
+                  result:
+                    type: array
+                    items:
+                      $ref: "../schemas/UserCrypto.yaml"

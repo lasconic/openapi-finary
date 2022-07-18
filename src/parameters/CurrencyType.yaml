@@ -1,0 +1,7 @@
+in: query
+name: type
+schema:
+  type: string
+  enum:
+    - crypto
+    - fiat

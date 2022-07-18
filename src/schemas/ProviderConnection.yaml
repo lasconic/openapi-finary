@@ -1,0 +1,12 @@
+type: object
+properties:
+  id:
+    type: string
+  last_sync_at:
+    type: string
+  provider:
+    $ref: "./Provider.yaml"
+required:
+  - id
+  - last_sync_at
+  - provider

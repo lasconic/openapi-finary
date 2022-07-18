@@ -1,0 +1,8 @@
+type: object
+properties:
+  message:
+    type: string
+  error:
+    $ref: "./Error.yaml"
+required:
+  - message

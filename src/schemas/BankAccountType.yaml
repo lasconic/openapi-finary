@@ -1,0 +1,24 @@
+type: object
+properties:
+  id:
+    type: string
+  slug:
+    type: string
+  account_type:
+    type: string
+  subtype:
+    type: string
+  name:
+    type: string
+  display_name:
+    type: string
+  priority:
+    type: integer
+required:
+  - id
+  - slug
+  - account_type
+  - subtype
+  - name
+  - display_name
+  - priority

@@ -1,0 +1,34 @@
+get:
+  operationId: get_user_institution_connections
+  tags:
+    - user
+  summary: Get the logged in user's institution connections
+  description: Get the logged in user's institution connections
+  responses:
+    "200":
+      description: Success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/BaseResponse.yaml"
+              - type: object
+                properties:
+                  result:
+                    type: object
+                    properties:
+                      banks:
+                        type: array
+                        items:
+                          $ref: "../schemas/Bank.yaml"
+                      cryptos:
+                        type: array
+                        items: {}
+                      startups:
+                        type: array
+                        items:
+                          $ref: "../schemas/Startup.yaml"
+                    required:
+                      - banks
+                      - cryptos
+                      - startups

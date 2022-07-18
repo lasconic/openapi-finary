@@ -1,0 +1,23 @@
+type: object
+properties:
+  id:
+    type: string
+  correlation_id:
+    type: string
+  capabilities:
+    type: array
+    items:
+      type: string
+  status:
+    type: string
+  is_enabled:
+    type: boolean
+  provider:
+    $ref: "./Provider.yaml"
+required:
+  - id
+  - correlation_id
+  - capabilities
+  - status
+  - is_enabled
+  - provider

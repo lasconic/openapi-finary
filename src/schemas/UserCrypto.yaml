@@ -1,0 +1,73 @@
+type: object
+properties:
+  id:
+    type: integer
+  crypto:
+    $ref: "./Currency.yaml"
+  owning_type:
+    type: string
+  quantity:
+    type: number
+  current_price:
+    type: number
+  display_current_price:
+    type: number
+  buying_price:
+    type: number
+  buying_price_currency:
+    $ref: "./Currency.yaml"
+  display_buying_price:
+    type: number
+  current_value:
+    type: number
+  display_current_value:
+    type: number
+  unrealized_pnl:
+    type: number
+  display_unrealized_pnl:
+    type: number
+  unrealized_pnl_percent:
+    type: number
+  display_currency:
+    $ref: "./Currency.yaml"
+  account:
+    allOf:
+      - $ref: "./HoldingAccount.yaml"
+      - type: object
+        properties:
+          bank:
+            $ref: "./Institution.yaml"
+          exchange:
+            $ref: "./Institution.yaml"
+          institution:
+            $ref: "./Institution.yaml"
+          institution_connection: # TODO probably not a string
+            type: string
+            nullable: true
+          provider_connection:
+            nullable: true
+            allOf:
+              - $ref: "./ProviderConnection.yaml"
+        required:
+          - bank
+          - exchange
+          - institution
+          - institution_connection
+          - provider_connection
+required:
+  - id
+  - crypto
+  - owning_type
+  - quantity
+  - current_price
+  - display_current_price
+  - buying_price
+  - buying_price_currency
+  - display_buying_price
+  - current_value
+  - display_current_value
+  - unrealized_pnl
+  - display_unrealized_pnl
+  - unrealized_pnl_percent
+  - display_currency
+  - account

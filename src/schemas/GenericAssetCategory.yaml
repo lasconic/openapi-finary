@@ -1,7 +1,6 @@
 type: object
-nullable: true
 properties:
-  code:
+  name:
     type: string
 required:
-- code
+- name

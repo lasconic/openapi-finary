@@ -1,0 +1,22 @@
+get:
+  operationId: get_bank_account_types
+  tags:
+    - general
+  summary: Get the available bank account types, given a type of bank account (invest / cash)
+  description: Get the available bank account types, given a type of bank account (invest / cash)
+  parameters:
+    - $ref: "../parameters/BankAccountType.yaml"
+  responses:
+    "200":
+      description: Success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/BaseResponse.yaml"
+              - type: object
+                properties:
+                  result:
+                    type: array
+                    items:
+                      $ref: "../schemas/BankAccountType.yaml"

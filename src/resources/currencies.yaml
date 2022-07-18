@@ -1,0 +1,23 @@
+get:
+  operationId: get_currencies
+  tags:
+    - general
+  summary: Get the currencies for a given type and query
+  description: Get the currencies for a given type (`crypto` or `crypto`) and a query
+  parameters:
+    - $ref: "../parameters/CurrencyType.yaml"
+    - $ref: "../parameters/Query.yaml"
+  responses:
+    "200":
+      description: Success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/BaseResponse.yaml"
+              - type: object
+                properties:
+                  result:
+                    type: array
+                    items:
+                      $ref: "../schemas/Currency.yaml"

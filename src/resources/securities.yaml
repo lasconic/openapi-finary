@@ -1,0 +1,22 @@
+get:
+  operationId: get_securities
+  tags:
+    - general
+  summary: Search securities in Finary Database
+  description: Search securities in Finary Database
+  parameters:
+    - $ref: "../parameters/Query.yaml"
+  responses:
+    "200":
+      description: Success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/BaseResponse.yaml"
+              - type: object
+                properties:
+                  result:
+                    type: array
+                    items:
+                      $ref: "../schemas/Security.yaml"

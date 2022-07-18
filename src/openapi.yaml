@@ -1,27 +1,56 @@
 openapi: "3.0.0"
 info:
-  version: 1.0.0
-  title: Swagger Petstore
-  description: Multi-file boilerplate for OpenAPI Specification.
+  version: 0.1.0
+  title: Finary API
+  description: Finary API to interact with a user account.
   license:
     name: MIT
   contact:
-    name: API Support
-    url: http://www.example.com/support
-    email: support@example.com
+    name: Finary Support
+    url: http://community.finary.com
+    email: hello@finary.com
 servers:
-  - url: http://petstore.swagger.io/v1
+  - url: https://api.finary.com
 tags:
-  - name: pets
-paths:
-  /pets:
-    $ref: "./resources/pets.yaml"
-  /pets/{petId}:
-    $ref: "./resources/pet.yaml"
+  - name: user
+    description: resources specific to a user
+  - name: general
+    description: resources non specific to a user
 components:
-  parameters:
-    $ref: "./parameters/_index.yaml"
+  securitySchemes:
+    finary_access_token:
+      type: apiKey
+      in: cookie
+      name: finary_access_token # cookie name
   schemas:
     $ref: "./schemas/_index.yaml"
-  responses:
-    $ref: "./responses/_index.yaml"
+  parameters:
+    $ref: "./parameters/_index.yaml"
+security:
+  - finary_access_token: []
+paths:
+  /auth/signin:
+    $ref: "./resources/auth_signin.yaml"
+  /users/me:
+    $ref: "./resources/user_me.yaml"
+  /crypto/chains:
+    $ref: "./resources/crypto_chains.yaml"
+  /bank_account_types:
+    $ref: "./resources/bank_account_types.yaml"
+  /currencies/autocomplete:
+    $ref: "./resources/currencies.yaml"
+  /generic_asset_categories/autocomplete:
+    $ref: "./resources/generic_asset_categories.yaml"
+  /users/me/institutions/autocomplete:
+    $ref: "./resources/user_institutions.yaml"
+  /users/me/institution_connections/details:
+    $ref: "./resources/user_institution_connections.yaml"
+  /precious_metals/autocomplete:
+    $ref: "./resources/precious_metals.yaml"
+  /scpis/autocomplete:
+    $ref: "./resources/scpis.yaml"
+  /securities/autocomplete:
+    $ref: "./resources/securities.yaml"
+  "/users/me/cryptos":
+    $ref: "./resources/user_cryptos.yaml"
+

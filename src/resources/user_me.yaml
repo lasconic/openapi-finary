@@ -1,0 +1,18 @@
+get:
+  operationId: get_user_me
+  tags:
+    - user
+  summary: Get the logged in user
+  description: Get the logged in user
+  responses:
+    "200":
+      description: Success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/BaseResponse.yaml"
+              - type: object
+                properties:
+                  result:
+                    $ref: "../schemas/User.yaml"
