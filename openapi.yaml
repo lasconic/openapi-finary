@@ -12,10 +12,10 @@ info:
 servers:
   - url: 'https://api.finary.com'
 tags:
-  - name: user
-    description: resources specific to a user
   - name: general
     description: resources non specific to a user
+  - name: user
+    description: resources specific to a user
 components:
   securitySchemes:
     finary_access_token:
@@ -36,14 +36,100 @@ components:
         - email
         - password
         - device_id
-    Error:
+    InputCrypto:
       type: object
-      nullable: true
       properties:
-        code:
+        correlation_id:
           type: string
+        quantity:
+          type: number
+        buying_price:
+          type: number
+        holdings_account:
+          type: object
+          properties:
+            id:
+              type: string
+          required:
+            - id
       required:
-        - code
+        - correlation_id
+        - quantity
+        - buying_price
+        - holdings_account
+    Bank:
+      type: object
+      properties:
+        id:
+          type: string
+        connection_state:
+          type: string
+          nullable: true
+        last_sync_at:
+          type: string
+        last_successful_sync_at:
+          type: string
+        manual_sync:
+          type: boolean
+        last_provider_update_at:
+          type: string
+        name:
+          type: string
+        correlation_id:
+          type: string
+        original_connection_state:
+          type: string
+          nullable: true
+        institution:
+          $ref: '#/components/schemas/Institution'
+        provider_connection:
+          $ref: '#/components/schemas/ProviderConnection'
+        institution_provider:
+          $ref: '#/components/schemas/InstitutionProvider'
+        holdings_accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/HoldingAccount'
+        balance:
+          type: number
+      required:
+        - id
+        - last_sync_at
+        - last_successful_sync_at
+        - manual_sync
+        - last_provider_update_at
+        - name
+        - correlation_id
+        - institution
+        - provider_connection
+        - institution_provider
+        - holdings_accounts
+        - balance
+    BankAccountType:
+      type: object
+      properties:
+        id:
+          type: string
+        slug:
+          type: string
+        account_type:
+          type: string
+        subtype:
+          type: string
+        name:
+          type: string
+        display_name:
+          type: string
+        priority:
+          type: integer
+      required:
+        - id
+        - slug
+        - account_type
+        - subtype
+        - name
+        - display_name
+        - priority
     BaseResponse:
       type: object
       properties:
@@ -53,6 +139,365 @@ components:
           $ref: '#/components/schemas/Error'
       required:
         - message
+    CryptoChain:
+      type: object
+      properties:
+        id:
+          type: string
+        community_id:
+          type: integer
+        name:
+          type: string
+        native_token_id:
+          type: string
+        logo_url:
+          type: string
+        wrapped_token_id:
+          type: string
+      required:
+        - id
+        - community_id
+        - name
+        - native_token_id
+        - logo_url
+        - wrapped_token_id
+    Currency:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        code:
+          type: string
+        symbol:
+          type: string
+          nullable: true
+        correlation_id:
+          type: string
+        logo_url:
+          type: string
+          nullable: true
+      required:
+        - name
+        - code
+        - correlation_id
+    CurrencyAdvanced:
+      type: object
+      properties:
+        id:
+          type: integer
+        code:
+          type: string
+        name:
+          type: string
+        symbol:
+          type: string
+        currency_type:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        rank:
+          type: integer
+        correlation_id:
+          type: string
+        is_stable:
+          type: boolean
+        data_provider:
+          type: string
+        current_price:
+          type: string
+        currency_type_terminal:
+          type: string
+        external_logo_url:
+          type: string
+      required:
+        - id
+        - code
+        - name
+        - symbol
+        - currency_type
+        - created_at
+        - updated_at
+        - rank
+        - correlation_id
+        - is_stable
+        - data_provider
+        - current_price
+        - currency_type_terminal
+        - external_logo_url
+    Error:
+      type: object
+      nullable: true
+      properties:
+        code:
+          type: string
+      required:
+        - code
+    GenericAssetCategory:
+      type: object
+      properties:
+        name:
+          type: string
+      required:
+        - name
+    HoldingAccount:
+      type: object
+      properties:
+        slug:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        manual_type:
+          type: string
+          nullable: true
+        connection_id:
+          type: string
+          nullable: true
+        connection_state:
+          type: string
+          nullable: true
+        last_sync_at:
+          type: string
+        last_sync:
+          type: string
+          nullable: true
+        currency:
+          $ref: '#/components/schemas/Currency'
+        display_currency:
+          $ref: '#/components/schemas/Currency'
+        annual_yield:
+          type: number
+          nullable: true
+        balance:
+          type: number
+        display_balance:
+          type: number
+        transactions_count:
+          type: integer
+        bank_account_type:
+          $ref: '#/components/schemas/BankAccountType'
+        upnl:
+          type: number
+          nullable: true
+        display_upnl:
+          type: number
+          nullable: true
+        upnl_percent:
+          type: number
+          nullable: true
+        unrealized_pnl:
+          type: number
+          nullable: true
+        display_unrealized_pnl:
+          type: number
+          nullable: true
+        unrealized_pnl_percent:
+          type: number
+          nullable: true
+      required:
+        - slug
+        - id
+        - name
+        - last_sync_at
+        - currency
+        - display_currency
+        - annual_yield
+        - balance
+        - display_balance
+        - transactions_count
+    Institution:
+      type: object
+      properties:
+        id:
+          type: string
+        slug:
+          type: string
+        name:
+          type: string
+        countries:
+          type: array
+          items:
+            type: string
+        twitter_handle:
+          type: string
+          nullable: true
+        logo_url:
+          type: string
+          nullable: true
+        is_available:
+          type: boolean
+        is_requestable:
+          type: boolean
+        providers:
+          type: array
+          items:
+            $ref: '#/components/schemas/InstitutionProvider'
+      required:
+        - id
+        - slug
+        - name
+        - countries
+        - is_requestable
+    InstitutionProvider:
+      type: object
+      properties:
+        id:
+          type: string
+        correlation_id:
+          type: string
+        capabilities:
+          type: array
+          items:
+            type: string
+        status:
+          type: string
+        is_enabled:
+          type: boolean
+        provider:
+          $ref: '#/components/schemas/Provider'
+      required:
+        - id
+        - correlation_id
+        - capabilities
+        - status
+        - is_enabled
+        - provider
+    PreciousMetal:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        international_name:
+          type: string
+          nullable: true
+        image_url:
+          type: string
+          nullable: true
+        updated_at:
+          type: string
+        current_price:
+          type: number
+        display_current_price:
+          type: number
+        currency:
+          $ref: '#/components/schemas/Currency'
+        display_currency:
+          $ref: '#/components/schemas/Currency'
+      required:
+        - id
+        - name
+        - updated_at
+        - current_price
+        - display_current_price
+        - currency
+        - display_currency
+    Provider:
+      type: object
+      properties:
+        name:
+          type: string
+        correlation_id:
+          type: string
+      required:
+        - name
+        - correlation_id
+    ProviderConnection:
+      type: object
+      properties:
+        id:
+          type: string
+        last_sync_at:
+          type: string
+        provider:
+          $ref: '#/components/schemas/Provider'
+      required:
+        - id
+        - last_sync_at
+        - provider
+    SCPI:
+      type: object
+      properties:
+        correlation_id:
+          type: string
+        name:
+          type: string
+      required:
+        - correlation_id
+        - name
+    Security:
+      type: object
+      properties:
+        correlation_id:
+          type: string
+        name:
+          type: string
+        symbol:
+          type: string
+        currency:
+          $ref: '#/components/schemas/CurrencyAdvanced'
+        type:
+          type: string
+      required:
+        - correlation_id
+        - name
+        - symbol
+        - currency
+        - type
+    Startup:
+      type: object
+      properties:
+        id:
+          type: string
+        connection_state:
+          type: string
+          nullable: true
+        last_sync_at:
+          type: string
+        last_successful_sync_at:
+          type: string
+        manual_sync:
+          type: boolean
+        last_provider_update_at:
+          type: string
+        name:
+          type: string
+        correlation_id:
+          type: string
+        original_connection_state:
+          type: string
+          nullable: true
+        institution:
+          $ref: '#/components/schemas/Institution'
+        provider_connection:
+          $ref: '#/components/schemas/ProviderConnection'
+        institution_provider:
+          $ref: '#/components/schemas/InstitutionProvider'
+        holdings_accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/HoldingAccount'
+        balance:
+          type: number
+      required:
+        - id
+        - last_sync_at
+        - last_successful_sync_at
+        - manual_sync
+        - last_provider_update_at
+        - name
+        - correlation_id
+        - institution
+        - provider_connection
+        - institution_provider
+        - holdings_accounts
+        - balance
     User:
       type: object
       properties:
@@ -261,382 +706,6 @@ components:
         - slug
         - email
         - created_at
-    CryptoChain:
-      type: object
-      properties:
-        id:
-          type: string
-        community_id:
-          type: integer
-        name:
-          type: string
-        native_token_id:
-          type: string
-        logo_url:
-          type: string
-        wrapped_token_id:
-          type: string
-      required:
-        - id
-        - community_id
-        - name
-        - native_token_id
-        - logo_url
-        - wrapped_token_id
-    BankAccountType:
-      type: object
-      properties:
-        id:
-          type: string
-        slug:
-          type: string
-        account_type:
-          type: string
-        subtype:
-          type: string
-        name:
-          type: string
-        display_name:
-          type: string
-        priority:
-          type: integer
-      required:
-        - id
-        - slug
-        - account_type
-        - subtype
-        - name
-        - display_name
-        - priority
-    Currency:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        code:
-          type: string
-        symbol:
-          type: string
-          nullable: true
-        correlation_id:
-          type: string
-        logo_url:
-          type: string
-          nullable: true
-      required:
-        - name
-        - code
-        - correlation_id
-    GenericAssetCategory:
-      type: object
-      properties:
-        name:
-          type: string
-      required:
-        - name
-    Institution:
-      type: object
-      properties:
-        id:
-          type: string
-        slug:
-          type: string
-        name:
-          type: string
-        countries:
-          type: array
-          items:
-            type: string
-        twitter_handle:
-          type: string
-          nullable: true
-        logo_url:
-          type: string
-          nullable: true
-        is_available:
-          type: boolean
-        is_requestable:
-          type: boolean
-        providers:
-          type: array
-          items:
-            $ref: '#/components/schemas/InstitutionProvider'
-      required:
-        - id
-        - slug
-        - name
-        - countries
-        - is_requestable
-    InstitutionProvider:
-      type: object
-      properties:
-        id:
-          type: string
-        correlation_id:
-          type: string
-        capabilities:
-          type: array
-          items:
-            type: string
-        status:
-          type: string
-        is_enabled:
-          type: boolean
-        provider:
-          $ref: '#/components/schemas/Provider'
-      required:
-        - id
-        - correlation_id
-        - capabilities
-        - status
-        - is_enabled
-        - provider
-    Provider:
-      type: object
-      properties:
-        name:
-          type: string
-        correlation_id:
-          type: string
-      required:
-        - name
-        - correlation_id
-    ProviderConnection:
-      type: object
-      properties:
-        id:
-          type: string
-        last_sync_at:
-          type: string
-        provider:
-          $ref: '#/components/schemas/Provider'
-      required:
-        - id
-        - last_sync_at
-        - provider
-    Bank:
-      type: object
-      properties:
-        id:
-          type: string
-        connection_state:
-          type: string
-          nullable: true
-        last_sync_at:
-          type: string
-        last_successful_sync_at:
-          type: string
-        manual_sync:
-          type: boolean
-        last_provider_update_at:
-          type: string
-        name:
-          type: string
-        correlation_id:
-          type: string
-        original_connection_state:
-          type: string
-          nullable: true
-        institution:
-          $ref: '#/components/schemas/Institution'
-        provider_connection:
-          $ref: '#/components/schemas/ProviderConnection'
-        institution_provider:
-          $ref: '#/components/schemas/InstitutionProvider'
-        holdings_accounts:
-          type: array
-          items:
-            $ref: '#/components/schemas/HoldingAccount'
-        balance:
-          type: number
-      required:
-        - id
-        - last_sync_at
-        - last_successful_sync_at
-        - manual_sync
-        - last_provider_update_at
-        - name
-        - correlation_id
-        - institution
-        - provider_connection
-        - institution_provider
-        - holdings_accounts
-        - balance
-    HoldingAccount:
-      type: object
-      properties:
-        slug:
-          type: string
-        id:
-          type: string
-        name:
-          type: string
-        manual_type:
-          type: string
-          nullable: true
-        connection_id:
-          type: string
-        connection_state:
-          type: string
-          nullable: true
-        last_sync_at:
-          type: string
-        last_sync:
-          type: string
-        currency:
-          $ref: '#/components/schemas/Currency'
-        display_currency:
-          $ref: '#/components/schemas/Currency'
-        annual_yield:
-          type: number
-          nullable: true
-        balance:
-          type: number
-        display_balance:
-          type: number
-        transactions_count:
-          type: integer
-        bank_account_type:
-          $ref: '#/components/schemas/BankAccountType'
-        upnl:
-          type: number
-          nullable: true
-        display_upnl:
-          type: number
-          nullable: true
-        upnl_percent:
-          type: number
-          nullable: true
-        unrealized_pnl:
-          type: number
-          nullable: true
-        display_unrealized_pnl:
-          type: number
-          nullable: true
-        unrealized_pnl_percent:
-          type: number
-          nullable: true
-      required:
-        - slug
-        - id
-        - name
-        - connection_id
-        - last_sync_at
-        - last_sync
-        - currency
-        - display_currency
-        - annual_yield
-        - balance
-        - display_balance
-        - transactions_count
-    PreciousMetal:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        international_name:
-          type: string
-          nullable: true
-        image_url:
-          type: string
-          nullable: true
-        updated_at:
-          type: string
-        current_price:
-          type: number
-        display_current_price:
-          type: number
-        currency:
-          $ref: '#/components/schemas/Currency'
-        display_currency:
-          $ref: '#/components/schemas/Currency'
-      required:
-        - id
-        - name
-        - updated_at
-        - current_price
-        - display_current_price
-        - currency
-        - display_currency
-    SCPI:
-      type: object
-      properties:
-        correlation_id:
-          type: string
-        name:
-          type: string
-      required:
-        - correlation_id
-        - name
-    Security:
-      type: object
-      properties:
-        correlation_id:
-          type: string
-        name:
-          type: string
-        symbol:
-          type: string
-        currency:
-          $ref: '#/components/schemas/CurrencyAdvanced'
-        type:
-          type: string
-      required:
-        - correlation_id
-        - name
-        - symbol
-        - currency
-        - type
-    CurrencyAdvanced:
-      type: object
-      properties:
-        id:
-          type: integer
-        code:
-          type: string
-        name:
-          type: string
-        symbol:
-          type: string
-        currency_type:
-          type: string
-        created_at:
-          type: string
-        updated_at:
-          type: string
-        rank:
-          type: integer
-        correlation_id:
-          type: string
-        is_stable:
-          type: boolean
-        data_provider:
-          type: string
-        current_price:
-          type: string
-        currency_type_terminal:
-          type: string
-        external_logo_url:
-          type: string
-      required:
-        - id
-        - code
-        - name
-        - symbol
-        - currency_type
-        - created_at
-        - updated_at
-        - rank
-        - correlation_id
-        - is_stable
-        - data_provider
-        - current_price
-        - currency_type_terminal
-        - external_logo_url
     UserCrypto:
       type: object
       properties:
@@ -646,6 +715,9 @@ components:
           $ref: '#/components/schemas/Currency'
         owning_type:
           type: string
+          enum:
+            - hodled
+            - stacked
         quantity:
           type: number
         current_price:
@@ -738,6 +810,12 @@ components:
       name: name
       schema:
         type: string
+    CryptoId:
+      in: path
+      name: CryptoId
+      required: true
+      schema:
+        type: integer
 security:
   - finary_access_token: []
 paths:
@@ -960,53 +1038,7 @@ paths:
                           startups:
                             type: array
                             items:
-                              type: object
-                              properties:
-                                id:
-                                  type: string
-                                connection_state:
-                                  type: string
-                                  nullable: true
-                                last_sync_at:
-                                  type: string
-                                last_successful_sync_at:
-                                  type: string
-                                manual_sync:
-                                  type: boolean
-                                last_provider_update_at:
-                                  type: string
-                                name:
-                                  type: string
-                                correlation_id:
-                                  type: string
-                                original_connection_state:
-                                  type: string
-                                  nullable: true
-                                institution:
-                                  $ref: '#/components/schemas/Institution'
-                                provider_connection:
-                                  $ref: '#/components/schemas/ProviderConnection'
-                                institution_provider:
-                                  $ref: '#/components/schemas/InstitutionProvider'
-                                holdings_accounts:
-                                  type: array
-                                  items:
-                                    $ref: '#/components/schemas/HoldingAccount'
-                                balance:
-                                  type: number
-                              required:
-                                - id
-                                - last_sync_at
-                                - last_successful_sync_at
-                                - manual_sync
-                                - last_provider_update_at
-                                - name
-                                - correlation_id
-                                - institution
-                                - provider_connection
-                                - institution_provider
-                                - holdings_accounts
-                                - balance
+                              $ref: '#/components/schemas/Startup'
                         required:
                           - banks
                           - cryptos
@@ -1101,3 +1133,85 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/UserCrypto'
+    post:
+      operationId: add_user_crypto
+      tags:
+        - user
+      summary: Create a crypto entry in crypto account
+      description: Create a crypto entry in crypto account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InputCrypto'
+      responses:
+        '201':
+          description: Created.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponse'
+                  - type: object
+                    properties:
+                      result:
+                        $ref: '#/components/schemas/UserCrypto'
+  '/users/me/cryptos/{CryptoId}':
+    get:
+      operationId: get_user_crypto
+      tags:
+        - user
+      summary: Get a crypto line by CryptoId
+      description: Get a crypto line by CryptoId
+      parameters:
+        - $ref: '#/components/parameters/CryptoId'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponse'
+                  - type: object
+                    properties:
+                      result:
+                        $ref: '#/components/schemas/UserCrypto'
+    put:
+      operationId: update_user_crypto
+      tags:
+        - user
+      summary: Update a crypto line by CryptoId
+      description: Update a crypto line by CryptoId
+      parameters:
+        - $ref: '#/components/parameters/CryptoId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCrypto'
+      responses:
+        '200':
+          description: The crypto line was updated successfully.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponse'
+                  - type: object
+                    properties:
+                      result:
+                        $ref: '#/components/schemas/UserCrypto'
+    delete:
+      operationId: delete_user_crypto
+      tags:
+        - user
+      summary: Delete a crypto line by CryptoId
+      description: Delete a crypto line by CryptoId
+      parameters:
+        - $ref: '#/components/parameters/CryptoId'
+      responses:
+        '204':
+          description: The crypto line was deleted successfully.
