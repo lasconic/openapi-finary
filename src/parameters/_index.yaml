@@ -11,3 +11,5 @@ Name:
 #path
 CryptoId: 
   $ref: "./path/CryptoId.yaml"
+GenericAssetId: 
+  $ref: "./path/GenericAssetId.yaml"

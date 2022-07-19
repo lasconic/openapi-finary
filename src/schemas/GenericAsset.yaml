@@ -1,0 +1,52 @@
+type: object
+properties:
+  id:
+    type: integer
+  name:
+    type: string
+  updated_at:
+    type: string
+  category:
+    type: string
+    description: A Generic Asset Category as returned by the generic_asset_categories resource
+  quantity:
+    type: number
+  buying_price:
+    type: number
+  display_buying_price:
+    type: number
+  current_price:
+    type: number
+  display_current_price:
+    type: number
+  current_value:
+    type: number
+  display_current_value:
+    type: number
+  unrealized_pnl:
+    type: number
+  display_unrealized_pnl:
+    type: number
+  unrealized_pnl_percent:
+    type: number
+  display_currency:
+    $ref: "./Currency.yaml"
+  currency:
+    $ref: "./Currency.yaml"
+required:
+  - id
+  - name
+  - updated_at
+  - category
+  - quantity
+  - buying_price
+  - display_buying_price
+  - current_price
+  - display_current_price
+  - current_value
+  - display_current_value
+  - unrealized_pnl
+  - display_unrealized_pnl
+  - unrealized_pnl_percent
+  - display_currency
+  - currency

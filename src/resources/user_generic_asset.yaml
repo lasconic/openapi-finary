@@ -1,0 +1,20 @@
+get:
+  operationId: get_user_generic_asset
+  tags:
+    - user
+  summary: Get a generic asset by id
+  description: Get a generic asset by id
+  parameters:
+    - $ref: "../parameters/path/GenericAssetId.yaml"
+  responses:
+    "200":
+      description: Success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/BaseResponse.yaml"
+              - type: object
+                properties:
+                  result:
+                    $ref: "../schemas/GenericAsset.yaml"

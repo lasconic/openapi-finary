@@ -24,6 +24,8 @@ DistributionShareValue:
   $ref: "./DistributionShareValue.yaml"
 Error:
   $ref: "./Error.yaml"
+GenericAsset:
+  $ref: "./GenericAsset.yaml"
 GenericAssetCategory:
   $ref: "./GenericAssetCategory.yaml"
 HoldingAccount:

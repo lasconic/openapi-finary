@@ -1,0 +1,6 @@
+in: path
+name: GenericAssetId
+required: true
+schema:
+  type: integer
+

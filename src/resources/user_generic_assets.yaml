@@ -1,0 +1,20 @@
+get:
+  operationId: get_user_generic_assets
+  tags:
+    - user
+  summary: Get logged in user generic assets
+  description: Get logged in user generic assets
+  responses:
+    "200":
+      description: Success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/BaseResponse.yaml"
+              - type: object
+                properties:
+                  result:
+                    type: array
+                    items:
+                      $ref: "../schemas/GenericAsset.yaml"

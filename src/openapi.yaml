@@ -57,6 +57,7 @@ paths:
     $ref: "./resources/user_crypto.yaml"
   /users/me/wealth/startups:
     $ref: "./resources/user_startups.yaml"
-
-  
-
+  /users/me/generic_assets:
+    $ref: "./resources/user_generic_assets.yaml"
+  /users/me/generic_assets/{GenericAssetId}:
+    $ref: "./resources/user_generic_asset.yaml"
