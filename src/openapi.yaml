@@ -55,5 +55,8 @@ paths:
     $ref: "./resources/user_cryptos.yaml"
   /users/me/cryptos/{CryptoId}:
     $ref: "./resources/user_crypto.yaml"
+  /users/me/wealth/startups:
+    $ref: "./resources/user_startups.yaml"
+
   
 

@@ -1,0 +1,69 @@
+get:
+  operationId: get_user_startups
+  tags:
+    - user
+  summary: Get logged user startups
+  description: Get logged user startups
+  responses:
+    "200":
+      description: Success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/BaseResponse.yaml"
+              - type: object
+                properties:
+                  result:
+                    type: object
+                    properties:
+                      total_current_value:
+                        type: number
+                      total_invested:
+                        type: number
+                      unrealized_irr:
+                        type: number
+                      realized_irr:
+                        type: number
+                        nullable: true
+                      unrealized_pnl:
+                        type: number
+                      unrealized_pnl_percent:
+                        type: number
+                      average_holding_duration:
+                        type: number
+                      multiple:
+                        type: number
+                      distribution:
+                        type: object
+                        properties:
+                          companies:
+                            $ref: "../schemas/DistributionShare.yaml"
+                          countries:
+                            $ref: "../schemas/DistributionShare.yaml"
+                          round_types:
+                            $ref: "../schemas/DistributionShare.yaml" #TODO replace by known keys ? equity...
+                          funding_round:
+                            $ref: "../schemas/DistributionShare.yaml" #TODO replace by known keys ? seed, crowdequity...
+                          years:
+                            $ref: "../schemas/DistributionShare.yaml"
+                        required:
+                          - companies
+                          - countries
+                          - round_types
+                          - funding_rounds
+                          - years
+                      startups:
+                        type: array
+                        items:
+                          $ref: "../schemas/Startup.yaml"
+                required:
+                  - total_current_value
+                  - total_invested
+                  - realized_irr
+                  - unrealized_pnl
+                  - unrealized_pnl_percent
+                  - average_holding_duration
+                  - multiple
+                  - distribution
+                  - startups

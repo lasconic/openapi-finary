@@ -4,18 +4,24 @@ LoginInfo:
 InputCrypto:
   $ref: "../schemas/InputCrypto.yaml" 
 # output
-Bank:
-  $ref: "./Bank.yaml"
 BankAccountType:
   $ref: "./BankAccountType.yaml"
 BaseResponse:
   $ref: "./BaseResponse.yaml"
+ConnectionBank:
+  $ref: "./ConnectionBank.yaml"
+ConnectionStartup:
+  $ref: "./ConnectionStartup.yaml"
 CryptoChain:
   $ref: "./CryptoChain.yaml"
 Currency:
   $ref: "./Currency.yaml"
 CurrencyAdvanced:
   $ref: "./CurrencyAdvanced.yaml"
+DistributionShare:
+  $ref: "./DistributionShare.yaml"
+DistributionShareValue:
+  $ref: "./DistributionShareValue.yaml"
 Error:
   $ref: "./Error.yaml"
 GenericAssetCategory:

@@ -20,14 +20,14 @@ get:
                       banks:
                         type: array
                         items:
-                          $ref: "../schemas/Bank.yaml"
+                          $ref: "../schemas/ConnectionBank.yaml"
                       cryptos:
                         type: array
                         items: {}
                       startups:
                         type: array
                         items:
-                          $ref: "../schemas/Startup.yaml"
+                          $ref: "../schemas/ConnectionStartup.yaml"
                     required:
                       - banks
                       - cryptos

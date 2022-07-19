@@ -1,47 +1,33 @@
 type: object
 properties:
-  id:
-    type: string
-  connection_state:
-    type: string
-    nullable: true
-  last_sync_at:
-    type: string
-  last_successful_sync_at:
-    type: string
-  manual_sync:
-    type: boolean
-  last_provider_update_at:
-    type: string
   name:
     type: string
-  correlation_id:
+  slug:
     type: string
-  original_connection_state:
+  current_value:
+    type: number
+  investments_count:
+    type: integer
+  connected:
+    type: boolean
+  connected_with:
     type: string
     nullable: true
-  institution:
-    $ref: "./Institution.yaml"
-  provider_connection:
-    $ref: "./ProviderConnection.yaml"
-  institution_provider:
-    $ref: "./InstitutionProvider.yaml"
-  holdings_accounts:
-    type: array
-    items:
-      $ref: "./HoldingAccount.yaml"
-  balance:
+  multiple:
     type: number
+  unrealized_pnl:
+    type: number
+  logo_url:
+    type: string
+  sold:
+    type: boolean
 required:
-  - id
-  - last_sync_at
-  - last_successful_sync_at
-  - manual_sync
-  - last_provider_update_at
-  - name
-  - correlation_id
-  - institution
-  - provider_connection
-  - institution_provider
-  - holdings_accounts
-  - balance
+- name
+- slug
+- current_value
+- investments_count
+- connected
+- multiple
+- unrealized_pnl
+- logo_url
+- sold
