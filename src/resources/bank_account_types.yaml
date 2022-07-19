@@ -5,7 +5,7 @@ get:
   summary: Get the available bank account types, given a type of bank account (invest / cash)
   description: Get the available bank account types, given a type of bank account (invest / cash)
   parameters:
-    - $ref: "../parameters/BankAccountType.yaml"
+    - $ref: "../parameters/query/BankAccountType.yaml"
   responses:
     "200":
       description: Success.

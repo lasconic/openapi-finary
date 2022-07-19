@@ -1,0 +1,6 @@
+in: path
+name: CryptoId
+required: true
+schema:
+  type: integer
+

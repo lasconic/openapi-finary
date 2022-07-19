@@ -1,0 +1,20 @@
+type: object
+properties:
+  correlation_id:
+    type: string
+  quantity:
+    type: number
+  buying_price:
+    type: number
+  holdings_account:
+    type: object
+    properties:
+      id:
+        type: string
+    required:
+    - id
+required:
+- correlation_id
+- quantity
+- buying_price
+- holdings_account

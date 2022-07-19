@@ -1,8 +1,13 @@
+#query
 BankAccountType:
-  $ref: "./BankAccountType.yaml"
+  $ref: "./query/BankAccountType.yaml"
 CurrencyType:
-  $ref: "./CurrencyType.yaml"
+  $ref: "./query/CurrencyType.yaml"
 Query:
-  $ref: "./Query.yaml"
+  $ref: "./query/Query.yaml"
 Name:
-  $ref: "./Name.yaml"
+  $ref: "./query/Name.yaml"
+
+#path
+CryptoId: 
+  $ref: "./path/CryptoId.yaml"

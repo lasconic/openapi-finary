@@ -12,10 +12,10 @@ info:
 servers:
   - url: https://api.finary.com
 tags:
-  - name: user
-    description: resources specific to a user
   - name: general
     description: resources non specific to a user
+  - name: user
+    description: resources specific to a user
 components:
   securitySchemes:
     finary_access_token:
@@ -51,6 +51,9 @@ paths:
     $ref: "./resources/scpis.yaml"
   /securities/autocomplete:
     $ref: "./resources/securities.yaml"
-  "/users/me/cryptos":
+  /users/me/cryptos:
     $ref: "./resources/user_cryptos.yaml"
+  /users/me/cryptos/{CryptoId}:
+    $ref: "./resources/user_crypto.yaml"
+  
 

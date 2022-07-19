@@ -5,8 +5,8 @@ get:
   summary: Get the currencies for a given type and query
   description: Get the currencies for a given type (`crypto` or `crypto`) and a query
   parameters:
-    - $ref: "../parameters/CurrencyType.yaml"
-    - $ref: "../parameters/Query.yaml"
+    - $ref: "../parameters/query/CurrencyType.yaml"
+    - $ref: "../parameters/query/Query.yaml"
   responses:
     "200":
       description: Success.

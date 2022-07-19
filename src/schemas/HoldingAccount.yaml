@@ -11,6 +11,7 @@ properties:
     nullable: true
   connection_id:
     type: string
+    nullable: true
   connection_state:
     type: string
     nullable: true
@@ -18,6 +19,7 @@ properties:
     type: string
   last_sync:
     type: string
+    nullable: true
   currency:
     $ref: "./Currency.yaml"
   display_currency:
@@ -55,9 +57,7 @@ required:
   - slug
   - id
   - name
-  - connection_id
   - last_sync_at
-  - last_sync
   - currency
   - display_currency
   - annual_yield

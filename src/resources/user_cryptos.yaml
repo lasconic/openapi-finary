@@ -18,3 +18,29 @@ get:
                     type: array
                     items:
                       $ref: "../schemas/UserCrypto.yaml"
+                      
+post:
+  operationId: add_user_crypto
+  tags:
+    - user
+  summary: Create a crypto entry in crypto account
+  description: Create a crypto entry in crypto account
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../schemas/InputCrypto.yaml"
+  responses:
+    "201":
+      description: Created.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/BaseResponse.yaml"
+              - type: object
+                properties:
+                  result:
+                    $ref: "../schemas/UserCrypto.yaml"
+      

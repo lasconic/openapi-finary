@@ -5,7 +5,7 @@ get:
   summary: Search precious metal in Finary database
   description: Search precious metal in Finary database
   parameters:
-    - $ref: "../parameters/Query.yaml"
+    - $ref: "../parameters/query/Query.yaml"
   responses:
     "200":
       description: Success.

@@ -1,0 +1,57 @@
+get:
+  operationId: get_user_crypto
+  tags:
+    - user
+  summary: Get a crypto line by CryptoId
+  description: Get a crypto line by CryptoId
+  parameters:
+    - $ref: "../parameters/path/CryptoId.yaml"
+  responses:
+    "200":
+      description: Success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/BaseResponse.yaml"
+              - type: object
+                properties:
+                  result:
+                    $ref: "../schemas/UserCrypto.yaml"
+put:
+  operationId: update_user_crypto
+  tags:
+    - user
+  summary: Update a crypto line by CryptoId
+  description: Update a crypto line by CryptoId
+  parameters:
+    - $ref: "../parameters/path/CryptoId.yaml"
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../schemas/UserCrypto.yaml"
+  responses:
+    "200":
+      description: The crypto line was updated successfully.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/BaseResponse.yaml"
+              - type: object
+                properties:
+                  result:
+                    $ref: "../schemas/UserCrypto.yaml"
+delete:
+  operationId: delete_user_crypto
+  tags:
+    - user
+  summary: Delete a crypto line by CryptoId
+  description: Delete a crypto line by CryptoId
+  parameters:
+    - $ref: "../parameters/path/CryptoId.yaml"
+  responses:
+    "204":
+      description: The crypto line was deleted successfully.

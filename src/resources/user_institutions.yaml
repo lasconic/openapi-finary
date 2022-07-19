@@ -5,7 +5,7 @@ get:
   summary: Search institution with given name, also among user created ones?
   description: Search institution with given name, also among user created ones?
   parameters:
-    - $ref: "../parameters/Name.yaml"
+    - $ref: "../parameters/query/Name.yaml"
   responses:
     "200":
       description: Success.

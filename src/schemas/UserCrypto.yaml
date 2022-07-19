@@ -2,10 +2,13 @@ type: object
 properties:
   id:
     type: integer
-  crypto:
+  crypto: #note that the UI uses a single string when doing a PUT...
     $ref: "./Currency.yaml"
   owning_type:
     type: string
+    enum:
+      - hodled
+      - stacked
   quantity:
     type: number
   current_price:
@@ -30,7 +33,7 @@ properties:
     type: number
   display_currency:
     $ref: "./Currency.yaml"
-  account:
+  account: #note that the UI uses holding_account with just an id when doing a PUT...
     allOf:
       - $ref: "./HoldingAccount.yaml"
       - type: object

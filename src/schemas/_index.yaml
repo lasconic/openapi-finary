@@ -1,40 +1,44 @@
 # inputs
 LoginInfo:
   $ref: "./LoginInfo.yaml"
+InputCrypto:
+  $ref: "../schemas/InputCrypto.yaml" 
 # output
-Error:
-  $ref: "./Error.yaml"
-BaseResponse:
-  $ref: "./BaseResponse.yaml"
-User:
-  $ref: "./User.yaml"
-CryptoChain:
-  $ref: "./CryptoChain.yaml"
+Bank:
+  $ref: "./Bank.yaml"
 BankAccountType:
   $ref: "./BankAccountType.yaml"
+BaseResponse:
+  $ref: "./BaseResponse.yaml"
+CryptoChain:
+  $ref: "./CryptoChain.yaml"
 Currency:
   $ref: "./Currency.yaml"
+CurrencyAdvanced:
+  $ref: "./CurrencyAdvanced.yaml"
+Error:
+  $ref: "./Error.yaml"
 GenericAssetCategory:
   $ref: "./GenericAssetCategory.yaml"
+HoldingAccount:
+  $ref: "./HoldingAccount.yaml"
 Institution:
   $ref: "./Institution.yaml"
 InstitutionProvider:
   $ref: "./InstitutionProvider.yaml"
+PreciousMetal:
+  $ref: "./PreciousMetal.yaml"
 Provider:
   $ref: "./Provider.yaml"
 ProviderConnection: 
   $ref: "./ProviderConnection.yaml"
-Bank:
-  $ref: "./Bank.yaml"
-HoldingAccount:
-  $ref: "./HoldingAccount.yaml"
-PreciousMetal:
-  $ref: "./PreciousMetal.yaml"
 SCPI:
   $ref: "./SCPI.yaml"
 Security:
   $ref: "./Security.yaml"
-CurrencyAdvanced:
-  $ref: "./CurrencyAdvanced.yaml"
+Startup:
+  $ref: "./Startup.yaml"
+User:
+  $ref: "./User.yaml"
 UserCrypto:
   $ref: "./UserCrypto.yaml"
