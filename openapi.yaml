@@ -57,7 +57,41 @@ components:
         - quantity
         - buying_price
         - holdings_account
-    Bank:
+    BankAccountType:
+      type: object
+      properties:
+        id:
+          type: string
+        slug:
+          type: string
+        account_type:
+          type: string
+        subtype:
+          type: string
+        name:
+          type: string
+        display_name:
+          type: string
+        priority:
+          type: integer
+      required:
+        - id
+        - slug
+        - account_type
+        - subtype
+        - name
+        - display_name
+        - priority
+    BaseResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        error:
+          $ref: '#/components/schemas/Error'
+      required:
+        - message
+    ConnectionBank:
       type: object
       properties:
         id:
@@ -105,40 +139,54 @@ components:
         - institution_provider
         - holdings_accounts
         - balance
-    BankAccountType:
+    ConnectionStartup:
       type: object
       properties:
         id:
           type: string
-        slug:
+        connection_state:
           type: string
-        account_type:
+          nullable: true
+        last_sync_at:
           type: string
-        subtype:
+        last_successful_sync_at:
+          type: string
+        manual_sync:
+          type: boolean
+        last_provider_update_at:
           type: string
         name:
           type: string
-        display_name:
+        correlation_id:
           type: string
-        priority:
-          type: integer
+        original_connection_state:
+          type: string
+          nullable: true
+        institution:
+          $ref: '#/components/schemas/Institution'
+        provider_connection:
+          $ref: '#/components/schemas/ProviderConnection'
+        institution_provider:
+          $ref: '#/components/schemas/InstitutionProvider'
+        holdings_accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/HoldingAccount'
+        balance:
+          type: number
       required:
         - id
-        - slug
-        - account_type
-        - subtype
+        - last_sync_at
+        - last_successful_sync_at
+        - manual_sync
+        - last_provider_update_at
         - name
-        - display_name
-        - priority
-    BaseResponse:
-      type: object
-      properties:
-        message:
-          type: string
-        error:
-          $ref: '#/components/schemas/Error'
-      required:
-        - message
+        - correlation_id
+        - institution
+        - provider_connection
+        - institution_provider
+        - holdings_accounts
+        - balance
     CryptoChain:
       type: object
       properties:
@@ -228,6 +276,20 @@ components:
         - current_price
         - currency_type_terminal
         - external_logo_url
+    DistributionShare:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/DistributionShareValue'
+    DistributionShareValue:
+      type: object
+      properties:
+        value:
+          type: number
+        share:
+          type: number
+      required:
+        - value
+        - share
     Error:
       type: object
       nullable: true
@@ -453,51 +515,37 @@ components:
     Startup:
       type: object
       properties:
-        id:
-          type: string
-        connection_state:
-          type: string
-          nullable: true
-        last_sync_at:
-          type: string
-        last_successful_sync_at:
-          type: string
-        manual_sync:
-          type: boolean
-        last_provider_update_at:
-          type: string
         name:
           type: string
-        correlation_id:
+        slug:
           type: string
-        original_connection_state:
+        current_value:
+          type: number
+        investments_count:
+          type: integer
+        connected:
+          type: boolean
+        connected_with:
           type: string
           nullable: true
-        institution:
-          $ref: '#/components/schemas/Institution'
-        provider_connection:
-          $ref: '#/components/schemas/ProviderConnection'
-        institution_provider:
-          $ref: '#/components/schemas/InstitutionProvider'
-        holdings_accounts:
-          type: array
-          items:
-            $ref: '#/components/schemas/HoldingAccount'
-        balance:
+        multiple:
           type: number
+        unrealized_pnl:
+          type: number
+        logo_url:
+          type: string
+        sold:
+          type: boolean
       required:
-        - id
-        - last_sync_at
-        - last_successful_sync_at
-        - manual_sync
-        - last_provider_update_at
         - name
-        - correlation_id
-        - institution
-        - provider_connection
-        - institution_provider
-        - holdings_accounts
-        - balance
+        - slug
+        - current_value
+        - investments_count
+        - connected
+        - multiple
+        - unrealized_pnl
+        - logo_url
+        - sold
     User:
       type: object
       properties:
@@ -1031,14 +1079,14 @@ paths:
                           banks:
                             type: array
                             items:
-                              $ref: '#/components/schemas/Bank'
+                              $ref: '#/components/schemas/ConnectionBank'
                           cryptos:
                             type: array
                             items: {}
                           startups:
                             type: array
                             items:
-                              $ref: '#/components/schemas/Startup'
+                              $ref: '#/components/schemas/ConnectionStartup'
                         required:
                           - banks
                           - cryptos
@@ -1215,3 +1263,73 @@ paths:
       responses:
         '204':
           description: The crypto line was deleted successfully.
+  /users/me/wealth/startups:
+    get:
+      operationId: get_user_startups
+      tags:
+        - user
+      summary: Get logged user startups
+      description: Get logged user startups
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponse'
+                  - type: object
+                    properties:
+                      result:
+                        type: object
+                        properties:
+                          total_current_value:
+                            type: number
+                          total_invested:
+                            type: number
+                          unrealized_irr:
+                            type: number
+                          realized_irr:
+                            type: number
+                            nullable: true
+                          unrealized_pnl:
+                            type: number
+                          unrealized_pnl_percent:
+                            type: number
+                          average_holding_duration:
+                            type: number
+                          multiple:
+                            type: number
+                          distribution:
+                            type: object
+                            properties:
+                              companies:
+                                $ref: '#/components/schemas/DistributionShare'
+                              countries:
+                                $ref: '#/components/schemas/DistributionShare'
+                              round_types:
+                                $ref: '#/components/schemas/DistributionShare'
+                              funding_round:
+                                $ref: '#/components/schemas/DistributionShare'
+                              years:
+                                $ref: '#/components/schemas/DistributionShare'
+                            required:
+                              - companies
+                              - countries
+                              - round_types
+                              - funding_rounds
+                              - years
+                          startups:
+                            type: array
+                            items:
+                              $ref: '#/components/schemas/Startup'
+                    required:
+                      - total_current_value
+                      - total_invested
+                      - realized_irr
+                      - unrealized_pnl
+                      - unrealized_pnl_percent
+                      - average_holding_duration
+                      - multiple
+                      - distribution
+                      - startups
