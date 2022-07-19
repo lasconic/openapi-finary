@@ -298,6 +298,59 @@ components:
           type: string
       required:
         - code
+    GenericAsset:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        updated_at:
+          type: string
+        category:
+          type: string
+          description: A Generic Asset Category as returned by the generic_asset_categories resource
+        quantity:
+          type: number
+        buying_price:
+          type: number
+        display_buying_price:
+          type: number
+        current_price:
+          type: number
+        display_current_price:
+          type: number
+        current_value:
+          type: number
+        display_current_value:
+          type: number
+        unrealized_pnl:
+          type: number
+        display_unrealized_pnl:
+          type: number
+        unrealized_pnl_percent:
+          type: number
+        display_currency:
+          $ref: '#/components/schemas/Currency'
+        currency:
+          $ref: '#/components/schemas/Currency'
+      required:
+        - id
+        - name
+        - updated_at
+        - category
+        - quantity
+        - buying_price
+        - display_buying_price
+        - current_price
+        - display_current_price
+        - current_value
+        - display_current_value
+        - unrealized_pnl
+        - display_unrealized_pnl
+        - unrealized_pnl_percent
+        - display_currency
+        - currency
     GenericAssetCategory:
       type: object
       properties:
@@ -864,6 +917,12 @@ components:
       required: true
       schema:
         type: integer
+    GenericAssetId:
+      in: path
+      name: GenericAssetId
+      required: true
+      schema:
+        type: integer
 security:
   - finary_access_token: []
 paths:
@@ -1333,3 +1392,45 @@ paths:
                       - multiple
                       - distribution
                       - startups
+  /users/me/generic_assets:
+    get:
+      operationId: get_user_generic_assets
+      tags:
+        - user
+      summary: Get logged in user generic assets
+      description: Get logged in user generic assets
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponse'
+                  - type: object
+                    properties:
+                      result:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/GenericAsset'
+  '/users/me/generic_assets/{GenericAssetId}':
+    get:
+      operationId: get_user_generic_asset
+      tags:
+        - user
+      summary: Get a generic asset by id
+      description: Get a generic asset by id
+      parameters:
+        - $ref: '#/components/parameters/GenericAssetId'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponse'
+                  - type: object
+                    properties:
+                      result:
+                        $ref: '#/components/schemas/GenericAsset'
