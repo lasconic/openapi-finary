@@ -672,13 +672,13 @@ components:
           type: string
           nullable: true
         net_monthly_salary:
-          type: string
+          type: integer
           nullable: true
         finary_investor_status:
           type: string
           nullable: true
         age:
-          type: string
+          type: number
           nullable: true
         is_free_trial_available:
           type: boolean
@@ -1413,6 +1413,47 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/GenericAsset'
+    post:
+      operationId: add_user_generic_asset
+      tags:
+        - user
+      summary: Create a generic asset entry
+      description: Create a generic asset entry
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                category:
+                  type: string
+                quantity:
+                  type: number
+                buying_price:
+                  type: number
+                current_price:
+                  type: number
+              required:
+                - name
+                - category
+                - quantity
+                - buying_price
+                - current_price
+      responses:
+        '201':
+          description: Created.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponse'
+                  - type: object
+                    properties:
+                      result:
+                        $ref: '#/components/schemas/GenericAsset'
   '/users/me/generic_assets/{GenericAssetId}':
     get:
       operationId: get_user_generic_asset
@@ -1434,3 +1475,40 @@ paths:
                     properties:
                       result:
                         $ref: '#/components/schemas/GenericAsset'
+    put:
+      operationId: update_user_generic_asset
+      tags:
+        - user
+      summary: Update a generic asset by id
+      description: Update a generic asset by id
+      parameters:
+        - $ref: '#/components/parameters/GenericAssetId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericAsset'
+      responses:
+        '200':
+          description: The generic asset was updated successfully.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponse'
+                  - type: object
+                    properties:
+                      result:
+                        $ref: '#/components/schemas/GenericAsset'
+    delete:
+      operationId: delete_user_generic_asset
+      tags:
+        - user
+      summary: Delete a generic asset by id
+      description: Delete a generic asset by id
+      parameters:
+        - $ref: '#/components/parameters/GenericAssetId'
+      responses:
+        '204':
+          description: The generic asset was deleted successfully.
