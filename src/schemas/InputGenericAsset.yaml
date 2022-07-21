@@ -1,0 +1,18 @@
+type: object
+properties:
+  name:
+    type: string
+  category:
+    type: string
+  quantity:
+    type: number
+  buying_price:
+    type: number
+  current_price:
+    type: number
+required:
+  - name
+  - category
+  - quantity
+  - buying_price
+  - current_price

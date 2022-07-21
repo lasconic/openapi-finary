@@ -70,13 +70,13 @@ properties:
     type: string
     nullable: true
   net_monthly_salary:
-    type: string
+    type: integer
     nullable: true
   finary_investor_status:
     type: string
     nullable: true
   age:
-    type: string
+    type: number
     nullable: true
   is_free_trial_available:
     type: boolean

@@ -18,3 +18,27 @@ get:
                     type: array
                     items:
                       $ref: "../schemas/GenericAsset.yaml"
+post:
+  operationId: add_user_generic_asset
+  tags:
+    - user
+  summary: Create a generic asset entry
+  description: Create a generic asset entry
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../schemas/InputGenericAsset.yaml"
+  responses:
+    "201":
+      description: Created.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/BaseResponse.yaml"
+              - type: object
+                properties:
+                  result:
+                    $ref: "../schemas/GenericAsset.yaml"

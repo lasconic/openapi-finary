@@ -18,3 +18,41 @@ get:
                 properties:
                   result:
                     $ref: "../schemas/GenericAsset.yaml"
+put:
+  operationId: update_user_generic_asset
+  tags:
+    - user
+  summary: Update a generic asset by id
+  description: Update a generic asset by id
+  parameters:
+    - $ref: "../parameters/path/GenericAssetId.yaml"
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../schemas/GenericAsset.yaml" # note: (InputGenericAsset + id) is used by the UI but a full object works too
+  responses:
+    "200":
+      description: The generic asset was updated successfully.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/BaseResponse.yaml"
+              - type: object
+                properties:
+                  result:
+                    $ref: "../schemas/GenericAsset.yaml"
+
+delete:
+  operationId: delete_user_generic_asset
+  tags:
+    - user
+  summary: Delete a generic asset by id
+  description: Delete a generic asset by id
+  parameters:
+    - $ref: "../parameters/path/GenericAssetId.yaml"
+  responses:
+    "204":
+      description: The generic asset was deleted successfully.
