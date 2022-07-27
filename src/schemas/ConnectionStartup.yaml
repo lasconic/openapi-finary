@@ -29,7 +29,7 @@ properties:
   holdings_accounts:
     type: array
     items:
-      $ref: "./HoldingAccount.yaml"
+      $ref: "./HoldingsAccount.yaml"
   balance:
     type: number
 required:

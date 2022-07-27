@@ -1,0 +1,46 @@
+type: object
+description: Information about a startup, independently from the user investment
+properties:
+  name:
+    type: string
+  slug:
+    type: string
+  logo_url:
+    type: string
+  founders:
+    type: array
+    items:
+      type: string
+  founded_at:
+    type: string
+  labels:
+    type: array
+    items:
+      type: string
+  description:
+    type: string
+  country_name:
+    type: string
+  country_code:
+    type: string
+  website:
+    type: string
+  funding_rounds:
+    type: array
+    items:
+      $ref: "./StartupFundingRound.yaml"
+  total_raised:
+    type: number
+required:
+  - name
+  - slug
+  - logo_url
+  - founders
+  - founded_at
+  - labels
+  - description
+  - country_name
+  - country_code
+  - website
+  - funding_rounds
+  - total_raised

@@ -1,0 +1,10 @@
+type: object
+description: A very short version of SCPI as returned by get_scpis
+properties:
+  correlation_id:
+    type: string
+  name:
+    type: string
+required:
+  - correlation_id
+  - name

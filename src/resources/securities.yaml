@@ -19,4 +19,4 @@ get:
                   result:
                     type: array
                     items:
-                      $ref: "../schemas/Security.yaml"
+                      $ref: "../schemas/SecurityResult.yaml"

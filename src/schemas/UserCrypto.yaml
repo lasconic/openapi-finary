@@ -33,30 +33,8 @@ properties:
     type: number
   display_currency:
     $ref: "./Currency.yaml"
-  account: #note that the UI uses holding_account with just an id when doing a PUT...
-    allOf:
-      - $ref: "./HoldingAccount.yaml"
-      - type: object
-        properties:
-          bank:
-            $ref: "./Institution.yaml"
-          exchange:
-            $ref: "./Institution.yaml"
-          institution:
-            $ref: "./Institution.yaml"
-          institution_connection: # TODO probably not a string
-            type: string
-            nullable: true
-          provider_connection:
-            nullable: true
-            allOf:
-              - $ref: "./ProviderConnection.yaml"
-        required:
-          - bank
-          - exchange
-          - institution
-          - institution_connection
-          - provider_connection
+  account: #note that the UI uses holdings_account with just an id when doing a PUT...
+      $ref: "./HoldingsAccount.yaml"
 required:
   - id
   - crypto
@@ -73,4 +51,3 @@ required:
   - display_unrealized_pnl
   - unrealized_pnl_percent
   - display_currency
-  - account

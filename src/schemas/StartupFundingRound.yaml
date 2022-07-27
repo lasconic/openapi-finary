@@ -1,0 +1,21 @@
+type: object
+properties:
+  name:
+    type: string
+  value:
+    type: integer
+  currency:
+    $ref: "./CurrencyAdvanced.yaml"
+  value_usd:
+    type: integer
+  announced_at:
+    type: string
+  num_investors:
+    type: integer
+required:
+  - name
+  - value
+  - currency
+  - value_usd
+  - announced_at
+  - num_investors

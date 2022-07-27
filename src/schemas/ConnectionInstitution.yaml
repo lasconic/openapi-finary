@@ -26,22 +26,16 @@ properties:
     $ref: "./ProviderConnection.yaml"
   institution_provider:
     $ref: "./InstitutionProvider.yaml"
-  holdings_accounts:
-    type: array
-    items:
-      $ref: "./HoldingsAccount.yaml"
-  balance:
-    type: number
 required:
-  - id
-  - last_sync_at
-  - last_successful_sync_at
-  - manual_sync
-  - last_provider_update_at
-  - name
-  - correlation_id
-  - institution
-  - provider_connection
-  - institution_provider
-  - holdings_accounts
-  - balance
+- id
+- connection_state
+- last_sync_at
+- last_successful_sync_at
+- manual_sync
+- last_provider_update_at
+- name
+- correlation_id
+- original_connection_state
+- institution
+- provider_connection
+- institution_provider

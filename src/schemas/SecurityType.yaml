@@ -1,0 +1,7 @@
+type: string
+enum:
+  - bond
+  - equity
+  - etf
+  - fund
+  - unknown

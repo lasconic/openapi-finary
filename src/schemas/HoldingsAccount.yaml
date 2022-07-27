@@ -4,6 +4,7 @@ properties:
     type: string
   id:
     type: string
+    format: uuid
   name:
     type: string
   manual_type:
@@ -53,6 +54,45 @@ properties:
   unrealized_pnl_percent:
     type: number
     nullable: true
+  
+  bank:
+    $ref: "./Institution.yaml"
+  exchange:
+    $ref: "./Institution.yaml"
+  institution:
+    $ref: "./Institution.yaml"
+  institution_connection:
+    nullable: true
+    allOf:
+      - $ref: "./ConnectionInstitution.yaml"
+  provider_connection:
+    nullable: true
+    allOf:
+      - $ref: "./ProviderConnection.yaml"
+
+
+  cryptos:
+    type: array
+    items:
+      $ref: "./UserCrypto.yaml"
+  securities:
+    type: array
+    items:
+      $ref: "./UserSecurity.yaml"
+  scpis:
+    type: array
+    items:
+      $ref: "./UserSCPI.yaml"
+  fonds_euro:
+    type: array
+    items: 
+      $ref: "./UserFondsEuro.yaml"
+  startups:
+    type: array
+    items:
+      $ref: "./UserStartup.yaml"
+
+
 required:
   - slug
   - id

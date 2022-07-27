@@ -1,0 +1,58 @@
+type: object
+properties:
+  id:
+    type: integer
+  correlation_id:
+    type: string
+    nullable: true
+  name:
+    type: string
+  buying_price:
+    type: number
+  display_buying_price:
+    type: number
+    nullable: true
+  current_price:
+    type: number
+  display_current_price:
+    type: number
+  annual_yield:
+    type: number
+  current_value:
+    type: number
+  display_current_value:
+    type: number
+  unrealized_pnl:
+    type: number
+    nullable: true
+  display_unrealized_pnl:
+    type: number
+    nullable: true
+  unrealized_pnl_percent:
+    type: number
+    nullable: true
+  currency:
+    $ref: "./Currency.yaml"
+  display_currency:
+    $ref: "./Currency.yaml"
+
+  bank_account:
+    $ref: "./HoldingsAccount.yaml"
+  account:
+    $ref: "./HoldingsAccount.yaml"
+required:
+- id
+- correlation_id
+- name
+- buying_price
+- display_buying_price
+- current_price
+- display_current_price
+- annual_yield
+- current_value
+- display_current_value
+- unrealized_pnl
+- display_unrealized_pnl
+- unrealized_pnl_percent
+- currency
+- display_currency

@@ -1,0 +1,121 @@
+type: object
+properties:
+  id:
+    type: integer
+  round_type:
+    type: string
+  investment_date:
+    type: string
+  funding_round:
+    type: string
+  valuation_type:
+    type: string
+  transaction_type:
+    type: string
+  share_type:
+    type: string
+  expiration_date:
+    type: string
+    nullable: true
+  invested_via_holding:
+    type: boolean
+    nullable: true
+  invested_via_pea:
+    type: boolean
+    nullable: true
+  invested_via_150_0_b_ter:
+    type: boolean
+    nullable: true
+  memo:
+    type: string
+    nullable: true
+  converted:
+    type: boolean
+    nullable: true
+  state:
+    type: string
+  correlation_id:
+    type: string
+  discount:
+    type: number
+    nullable: true
+  currency:
+    $ref: "./Currency.yaml"
+  number_of_shares:
+    type: number
+  share_current_price:
+    type: number
+  display_share_current_price:
+    type: number
+  price_per_share:
+    type: number
+  display_price_per_share:
+    type: number
+  valuation_cap:
+    type: number
+    nullable: true
+  display_valuation_cap:
+    type: number
+    nullable: true
+  valuation_floor:
+    type: number
+    nullable: true
+  display_valuation_floor:
+    type: number
+    nullable: true
+  max_amount_raised:
+    type: number
+    nullable: true
+  display_max_amount_raised:
+    type: number
+    nullable: true
+  invested_amount:
+    type: number
+  display_invested_amount:
+    type: number
+  current_value:
+    type: number
+  display_current_value:
+    type: number
+  unrealized_pnl:
+    type: number
+  display_unrealized_pnl:
+    type: number
+  unrealized_pnl_percent:
+    type: number
+required:
+  - id
+  - round_type
+  - investment_date
+  - funding_round
+  - valuation_type
+  - transaction_type
+  - share_type
+  - expiration_date
+  - invested_via_holding
+  - invested_via_pea
+  - invested_via_150_0_b_ter
+  - memo
+  - converted
+  - state
+  - correlation_id
+  - discount
+  - currency
+  - number_of_shares
+  - share_current_price
+  - display_share_current_price
+  - price_per_share
+  - display_price_per_share
+  - valuation_cap
+  - display_valuation_cap
+  - valuation_floor
+  - display_valuation_floor
+  - max_amount_raised
+  - display_max_amount_raised
+  - invested_amount
+  - display_invested_amount
+  - current_value
+  - display_current_value
+  - unrealized_pnl
+  - display_unrealized_pnl
+  - unrealized_pnl_percent

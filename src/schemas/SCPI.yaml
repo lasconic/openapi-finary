@@ -1,9 +1,50 @@
 type: object
+description: Information about an subscribed SCPI, used a sub object of a UserSCPI
 properties:
-  correlation_id:
-    type: string
+  id:
+    type: integer
   name:
     type: string
+  scpi_type:
+    type: string
+  category:
+    type: string
+  current_price:
+    type: number
+  display_current_price:
+    type: number
+  withdrawal_value:
+    type: number
+  subscription_price:
+    type: number
+  display_subscription_price:
+    type: number
+  subscription_fees_ratio:
+    type: number
+  management_fees_ratio:
+    type: number
+  exit_fees_ratio:
+    type: number
+    nullable: true
+  tdvm_ratio:
+    type: number
+  currency:
+    $ref: "./Currency.yaml"
+  display_currency:
+    $ref: "./Currency.yaml"
 required:
-  - correlation_id
-  - name
+- id
+- name
+- scpi_type
+- category
+- current_price
+- display_current_price
+- withdrawal_value
+- subscription_price
+- display_subscription_price
+- subscription_fees_ratio
+- management_fees_ratio
+- exit_fees_ratio
+- tdvm_ratio
+- currency
+- display_currency

@@ -122,6 +122,7 @@ properties:
         type: number
       income_tax_rate:
         type: number
+        nullable: true
     required:
     - has_clicked_opportunities
     - monthly_expenses

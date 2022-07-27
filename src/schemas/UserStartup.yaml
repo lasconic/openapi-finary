@@ -1,0 +1,63 @@
+type: object
+properties:
+  id:
+    type: integer
+  provider_connection_id:
+    type: string
+  valuation:
+    type: number
+    nullable: true
+  multiple:
+    type: number
+  buying_value:
+    type: number
+  startup:
+    $ref: "./StartupInfo.yaml"
+  shares:
+    type: number
+  buying_price:
+    type: number
+  display_buying_price:
+    type: number
+  user_estimated_price:
+    type: number
+  display_user_estimated_price:
+    type: number
+  current_value:
+    type: number
+  display_current_value:
+    type: number
+  unrealized_pnl:
+    type: number
+  display_unrealized_pnl:
+    type: number
+  unrealized_pnl_percent:
+    type: number
+  investments:
+    type: array
+    items:
+      $ref: "./StartupInvestment.yaml"
+  currency:
+    $ref: "./Currency.yaml"
+  display_currency:
+    $ref: "./Currency.yaml"
+required:
+- id
+- provider_connection_id
+- valuation
+- multiple
+- buying_value
+- startup
+- shares
+- buying_price
+- display_buying_price
+- user_estimated_price
+- display_user_estimated_price
+- current_value
+- display_current_value
+- unrealized_pnl
+- display_unrealized_pnl
+- unrealized_pnl_percent
+- investments
+- currency
+- display_currency

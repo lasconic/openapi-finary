@@ -10,6 +10,8 @@ BaseResponse:
   $ref: "./BaseResponse.yaml"
 ConnectionBank:
   $ref: "./ConnectionBank.yaml"
+ConnectionInstitution:
+  $ref: "./ConnectionInstitution.yaml"
 ConnectionStartup:
   $ref: "./ConnectionStartup.yaml"
 CryptoChain:
@@ -28,8 +30,8 @@ GenericAsset:
   $ref: "./GenericAsset.yaml"
 GenericAssetCategory:
   $ref: "./GenericAssetCategory.yaml"
-HoldingAccount:
-  $ref: "./HoldingAccount.yaml"
+HoldingsAccount:
+  $ref: "./HoldingsAccount.yaml"
 Institution:
   $ref: "./Institution.yaml"
 InstitutionProvider:
@@ -42,11 +44,29 @@ ProviderConnection:
   $ref: "./ProviderConnection.yaml"
 SCPI:
   $ref: "./SCPI.yaml"
+SCPIResult:
+  $ref: "./SCPIResult.yaml"
 Security:
   $ref: "./Security.yaml"
+SecurityResult:
+  $ref: "./SecurityResult.yaml"
+SecurityType:
+  $ref: "./SecurityType.yaml"
 Startup:
   $ref: "./Startup.yaml"
+StartupInvestment:
+  $ref: "./StartupInvestment.yaml"
+StartupFoundingRound:
+  $ref: "./StartupFundingRound.yaml"
+StartupInfo:
+  $ref: "./StartupInfo.yaml"
 User:
   $ref: "./User.yaml"
 UserCrypto:
   $ref: "./UserCrypto.yaml"
+UserFondsEuro:
+  $ref: "./UserFondsEuro.yaml"
+UserSCPI:
+  $ref: "./UserSCPI.yaml"
+UserSecurity:
+  $ref: "./UserSecurity.yaml"

@@ -1,0 +1,76 @@
+type: object
+properties:
+  id:
+    type: integer
+  correlation_id:
+    type: string
+  bought_at:
+    type: string
+    nullable: true
+  property_type:
+    type: string
+  dismemberment_month_period:
+    type: string
+    nullable: true
+  months_until_dismemberment_ends:
+    type: integer
+  scpi:
+    $ref: "./SCPI.yaml"
+  current_value:
+    type: number
+  display_current_value:
+    type: number
+  unrealized_pnl:
+    type: number
+  display_unrealized_pnl:
+    type: number
+  unrealized_pnl_percent:
+    type: number
+  shares:
+    type: number
+  buying_price:
+    type: number
+  display_buying_price:
+    type: number
+  taxes:
+    type: number
+  display_taxes:
+    type: number
+  monthly_revenue:
+    type: number
+  display_monthly_revenue:
+    type: number
+  reimbursed_percent:
+    type: number
+    nullable: true
+  loans:
+    type: array
+    items: {} #TODO add loans type
+  bank_account:
+    $ref: "./HoldingsAccount.yaml"
+  account:
+    $ref: "./HoldingsAccount.yaml"
+required:
+- id
+- correlation_id
+- bought_at
+- property_type
+- dismemberment_month_period
+- months_until_dismemberment_ends
+- scpi
+- current_value
+- display_current_value
+- unrealized_pnl
+- display_unrealized_pnl
+- unrealized_pnl_percent
+- shares
+- buying_price
+- display_buying_price
+- taxes
+- display_taxes
+- monthly_revenue
+- display_monthly_revenue
+- reimbursed_percent
+- loans
+#- bank_account
+#- account

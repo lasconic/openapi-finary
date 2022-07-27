@@ -1,11 +1,11 @@
 get:
-  operationId: get_scpis
+  operationId: get_user_holdings_accounts
   tags:
-    - general
-  summary: Search scpis in Finary Database
-  description: Search scpis in Finary Database
+    - user
+  summary: Get the holdings accounts of the current user
+  description: Get the holdings accounts of the current user
   parameters:
-    - $ref: "../parameters/query/Query.yaml"
+    - $ref: "../parameters/query/HoldingsAccountType.yaml"
   responses:
     "200":
       description: Success.
@@ -19,4 +19,4 @@ get:
                   result:
                     type: array
                     items:
-                      $ref: "../schemas/SCPIResult.yaml"
+                      $ref: "../schemas/HoldingsAccount.yaml"

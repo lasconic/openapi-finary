@@ -1,0 +1,8 @@
+in: query
+name: manual_type
+required: false
+schema:
+  type: string
+  enum:
+    - crypto
+    - stocks

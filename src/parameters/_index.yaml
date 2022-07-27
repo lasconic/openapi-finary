@@ -7,9 +7,10 @@ Query:
   $ref: "./query/Query.yaml"
 Name:
   $ref: "./query/Name.yaml"
-
+HoldingsAccountType:
+  $ref: "./query/HoldingsAccountType.yaml"
 #path
-CryptoId: 
+CryptoId:
   $ref: "./path/CryptoId.yaml"
-GenericAssetId: 
+GenericAssetId:
   $ref: "./path/GenericAssetId.yaml"

@@ -61,3 +61,13 @@ paths:
     $ref: "./resources/user_generic_assets.yaml"
   /users/me/generic_assets/{GenericAssetId}:
     $ref: "./resources/user_generic_asset.yaml"
+  /users/me/holdings_accounts:
+    $ref: "./resources/user_holdings_accounts.yaml"
+
+  /users/me/scpis:
+    $ref: "./resources/user_scpis.yaml"
+  /users/me/fonds_euro:
+    $ref: "./resources/user_fonds_euro.yaml"
+  /users/me/securities:
+    $ref: "./resources/user_securities.yaml"
+

@@ -1,11 +1,9 @@
 get:
-  operationId: get_scpis
+  operationId: get_user_fonds_euro
   tags:
-    - general
-  summary: Search scpis in Finary Database
-  description: Search scpis in Finary Database
-  parameters:
-    - $ref: "../parameters/query/Query.yaml"
+    - user
+  summary: Get the Fonds Euro for the current user
+  description: Get the Fonds Euro for the current user
   responses:
     "200":
       description: Success.
@@ -19,4 +17,4 @@ get:
                   result:
                     type: array
                     items:
-                      $ref: "../schemas/SCPIResult.yaml"
+                      $ref: "../schemas/UserFondsEuro.yaml"

@@ -8,6 +8,11 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
+# Design notes
+
+* Except for Currency/CurrencyAdvanced, I chose to create large objects with some non required properties instead of two (inherited or not) objects.
+For example, a Fond Euro sends back by get /user/me/fonds_euro has more properties than one from /users/me/holdings_accounts but they use the same object.
+
 
 ## End goals
 

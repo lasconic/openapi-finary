@@ -1,18 +1,39 @@
 type: object
 properties:
-  correlation_id:
+  slug:
     type: string
   name:
     type: string
   symbol:
     type: string
-  currency:
-    $ref: "./CurrencyAdvanced.yaml"
-  type:
+    nullable: true
+  logo_url:
     type: string
+  security_type:
+    $ref: "./SecurityType.yaml"
+  current_price:
+    type: number
+  display_current_price:
+    type: number
+  subscription_fees_ratio:
+    type: number
+    nullable: true
+  expense_ratio:
+    type: number
+    nullable: true
+  currency:
+    $ref: "./Currency.yaml"
+  display_currency:
+    $ref: "./Currency.yaml"
 required:
-- correlation_id
+- slug
 - name
 - symbol
+- logo_url
+- security_type
+- current_price
+- display_current_price
+- subscription_fees_ratio
+- expense_ratio
 - currency
-- type
+- display_currency

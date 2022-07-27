@@ -1,0 +1,41 @@
+type: object
+properties:
+  id:
+    type: integer
+  correlation_id:
+    type: string
+    nullable: true
+  security:
+    $ref: "./Security.yaml"
+  quantity:
+    type: number
+  current_value:
+    type: number
+  display_current_value:
+    type: number
+  unrealized_pnl:
+    type: number
+    nullable: true
+  display_unrealized_pnl:
+    type: number
+    nullable: true
+  unrealized_pnl_percent:
+    type: number
+    nullable: true
+  buying_price:
+    type: number
+  display_buying_price:
+    type: number
+    nullable: true
+required:
+- id
+- correlation_id
+- security
+- quantity
+- current_value
+- display_current_value
+- unrealized_pnl
+- display_unrealized_pnl
+- unrealized_pnl_percent
+- buying_price
+- display_buying_price
