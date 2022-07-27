@@ -123,7 +123,7 @@ components:
         holdings_accounts:
           type: array
           items:
-            $ref: '#/components/schemas/HoldingAccount'
+            $ref: '#/components/schemas/HoldingsAccount'
         balance:
           type: number
       required:
@@ -139,6 +139,48 @@ components:
         - institution_provider
         - holdings_accounts
         - balance
+    ConnectionInstitution:
+      type: object
+      properties:
+        id:
+          type: string
+        connection_state:
+          type: string
+          nullable: true
+        last_sync_at:
+          type: string
+        last_successful_sync_at:
+          type: string
+        manual_sync:
+          type: boolean
+        last_provider_update_at:
+          type: string
+        name:
+          type: string
+        correlation_id:
+          type: string
+        original_connection_state:
+          type: string
+          nullable: true
+        institution:
+          $ref: '#/components/schemas/Institution'
+        provider_connection:
+          $ref: '#/components/schemas/ProviderConnection'
+        institution_provider:
+          $ref: '#/components/schemas/InstitutionProvider'
+      required:
+        - id
+        - connection_state
+        - last_sync_at
+        - last_successful_sync_at
+        - manual_sync
+        - last_provider_update_at
+        - name
+        - correlation_id
+        - original_connection_state
+        - institution
+        - provider_connection
+        - institution_provider
     ConnectionStartup:
       type: object
       properties:
@@ -171,7 +213,7 @@ components:
         holdings_accounts:
           type: array
           items:
-            $ref: '#/components/schemas/HoldingAccount'
+            $ref: '#/components/schemas/HoldingsAccount'
         balance:
           type: number
       required:
@@ -358,13 +400,14 @@ components:
           type: string
       required:
         - name
-    HoldingAccount:
+    HoldingsAccount:
       type: object
       properties:
         slug:
           type: string
         id:
           type: string
+          format: uuid
         name:
           type: string
         manual_type:
@@ -414,6 +457,102 @@ components:
         unrealized_pnl_percent:
           type: number
           nullable: true
+        bank:
+          $ref: '#/components/schemas/Institution'
+        exchange:
+          $ref: '#/components/schemas/Institution'
+        institution:
+          $ref: '#/components/schemas/Institution'
+        institution_connection:
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/ConnectionInstitution'
+        provider_connection:
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/ProviderConnection'
+        cryptos:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserCrypto'
+        securities:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserSecurity'
+        scpis:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserSCPI'
+        fonds_euro:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserFondsEuro'
+        startups:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              provider_connection_id:
+                type: string
+              valuation:
+                type: number
+                nullable: true
+              multiple:
+                type: number
+              buying_value:
+                type: number
+              startup:
+                $ref: '#/components/schemas/StartupInfo'
+              shares:
+                type: number
+              buying_price:
+                type: number
+              display_buying_price:
+                type: number
+              user_estimated_price:
+                type: number
+              display_user_estimated_price:
+                type: number
+              current_value:
+                type: number
+              display_current_value:
+                type: number
+              unrealized_pnl:
+                type: number
+              display_unrealized_pnl:
+                type: number
+              unrealized_pnl_percent:
+                type: number
+              investments:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StartupInvestment'
+              currency:
+                $ref: '#/components/schemas/Currency'
+              display_currency:
+                $ref: '#/components/schemas/Currency'
+            required:
+              - id
+              - provider_connection_id
+              - valuation
+              - multiple
+              - buying_value
+              - startup
+              - shares
+              - buying_price
+              - display_buying_price
+              - user_estimated_price
+              - display_user_estimated_price
+              - current_value
+              - display_current_value
+              - unrealized_pnl
+              - display_unrealized_pnl
+              - unrealized_pnl_percent
+              - investments
+              - currency
+              - display_currency
       required:
         - slug
         - id
@@ -538,6 +677,58 @@ components:
         - provider
     SCPI:
       type: object
+      description: 'Information about an subscribed SCPI, used a sub object of a UserSCPI'
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        scpi_type:
+          type: string
+        category:
+          type: string
+        current_price:
+          type: number
+        display_current_price:
+          type: number
+        withdrawal_value:
+          type: number
+        subscription_price:
+          type: number
+        display_subscription_price:
+          type: number
+        subscription_fees_ratio:
+          type: number
+        management_fees_ratio:
+          type: number
+        exit_fees_ratio:
+          type: number
+          nullable: true
+        tdvm_ratio:
+          type: number
+        currency:
+          $ref: '#/components/schemas/Currency'
+        display_currency:
+          $ref: '#/components/schemas/Currency'
+      required:
+        - id
+        - name
+        - scpi_type
+        - category
+        - current_price
+        - display_current_price
+        - withdrawal_value
+        - subscription_price
+        - display_subscription_price
+        - subscription_fees_ratio
+        - management_fees_ratio
+        - exit_fees_ratio
+        - tdvm_ratio
+        - currency
+        - display_currency
+    SCPIResult:
+      type: object
+      description: A very short version of SCPI as returned by get_scpis
       properties:
         correlation_id:
           type: string
@@ -549,6 +740,47 @@ components:
     Security:
       type: object
       properties:
+        slug:
+          type: string
+        name:
+          type: string
+        symbol:
+          type: string
+          nullable: true
+        logo_url:
+          type: string
+        security_type:
+          $ref: '#/components/schemas/SecurityType'
+        current_price:
+          type: number
+        display_current_price:
+          type: number
+        subscription_fees_ratio:
+          type: number
+          nullable: true
+        expense_ratio:
+          type: number
+          nullable: true
+        currency:
+          $ref: '#/components/schemas/Currency'
+        display_currency:
+          $ref: '#/components/schemas/Currency'
+      required:
+        - slug
+        - name
+        - symbol
+        - logo_url
+        - security_type
+        - current_price
+        - display_current_price
+        - subscription_fees_ratio
+        - expense_ratio
+        - currency
+        - display_currency
+    SecurityResult:
+      type: object
+      description: A very short version of SCPI as returned by get_securities
+      properties:
         correlation_id:
           type: string
         name:
@@ -558,13 +790,21 @@ components:
         currency:
           $ref: '#/components/schemas/CurrencyAdvanced'
         type:
-          type: string
+          $ref: '#/components/schemas/SecurityType'
       required:
         - correlation_id
         - name
         - symbol
         - currency
         - type
+    SecurityType:
+      type: string
+      enum:
+        - bond
+        - equity
+        - etf
+        - fund
+        - unknown
     Startup:
       type: object
       properties:
@@ -599,6 +839,197 @@ components:
         - unrealized_pnl
         - logo_url
         - sold
+    StartupInvestment:
+      type: object
+      properties:
+        id:
+          type: integer
+        round_type:
+          type: string
+        investment_date:
+          type: string
+        funding_round:
+          type: string
+        valuation_type:
+          type: string
+        transaction_type:
+          type: string
+        share_type:
+          type: string
+        expiration_date:
+          type: string
+          nullable: true
+        invested_via_holding:
+          type: boolean
+          nullable: true
+        invested_via_pea:
+          type: boolean
+          nullable: true
+        invested_via_150_0_b_ter:
+          type: boolean
+          nullable: true
+        memo:
+          type: string
+          nullable: true
+        converted:
+          type: boolean
+          nullable: true
+        state:
+          type: string
+        correlation_id:
+          type: string
+        discount:
+          type: number
+          nullable: true
+        currency:
+          $ref: '#/components/schemas/Currency'
+        number_of_shares:
+          type: number
+        share_current_price:
+          type: number
+        display_share_current_price:
+          type: number
+        price_per_share:
+          type: number
+        display_price_per_share:
+          type: number
+        valuation_cap:
+          type: number
+          nullable: true
+        display_valuation_cap:
+          type: number
+          nullable: true
+        valuation_floor:
+          type: number
+          nullable: true
+        display_valuation_floor:
+          type: number
+          nullable: true
+        max_amount_raised:
+          type: number
+          nullable: true
+        display_max_amount_raised:
+          type: number
+          nullable: true
+        invested_amount:
+          type: number
+        display_invested_amount:
+          type: number
+        current_value:
+          type: number
+        display_current_value:
+          type: number
+        unrealized_pnl:
+          type: number
+        display_unrealized_pnl:
+          type: number
+        unrealized_pnl_percent:
+          type: number
+      required:
+        - id
+        - round_type
+        - investment_date
+        - funding_round
+        - valuation_type
+        - transaction_type
+        - share_type
+        - expiration_date
+        - invested_via_holding
+        - invested_via_pea
+        - invested_via_150_0_b_ter
+        - memo
+        - converted
+        - state
+        - correlation_id
+        - discount
+        - currency
+        - number_of_shares
+        - share_current_price
+        - display_share_current_price
+        - price_per_share
+        - display_price_per_share
+        - valuation_cap
+        - display_valuation_cap
+        - valuation_floor
+        - display_valuation_floor
+        - max_amount_raised
+        - display_max_amount_raised
+        - invested_amount
+        - display_invested_amount
+        - current_value
+        - display_current_value
+        - unrealized_pnl
+        - display_unrealized_pnl
+        - unrealized_pnl_percent
+    StartupFoundingRound:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: integer
+        currency:
+          $ref: '#/components/schemas/CurrencyAdvanced'
+        value_usd:
+          type: integer
+        announced_at:
+          type: string
+        num_investors:
+          type: integer
+      required:
+        - name
+        - value
+        - currency
+        - value_usd
+        - announced_at
+        - num_investors
+    StartupInfo:
+      type: object
+      description: 'Information about a startup, independently from the user investment'
+      properties:
+        name:
+          type: string
+        slug:
+          type: string
+        logo_url:
+          type: string
+        founders:
+          type: array
+          items:
+            type: string
+        founded_at:
+          type: string
+        labels:
+          type: array
+          items:
+            type: string
+        description:
+          type: string
+        country_name:
+          type: string
+        country_code:
+          type: string
+        website:
+          type: string
+        funding_rounds:
+          type: array
+          items:
+            $ref: '#/components/schemas/StartupFoundingRound'
+        total_raised:
+          type: number
+      required:
+        - name
+        - slug
+        - logo_url
+        - founders
+        - founded_at
+        - labels
+        - description
+        - country_name
+        - country_code
+        - website
+        - funding_rounds
+        - total_raised
     User:
       type: object
       properties:
@@ -724,6 +1155,7 @@ components:
               type: number
             income_tax_rate:
               type: number
+              nullable: true
           required:
             - has_clicked_opportunities
             - monthly_expenses
@@ -844,29 +1276,7 @@ components:
         display_currency:
           $ref: '#/components/schemas/Currency'
         account:
-          allOf:
-            - $ref: '#/components/schemas/HoldingAccount'
-            - type: object
-              properties:
-                bank:
-                  $ref: '#/components/schemas/Institution'
-                exchange:
-                  $ref: '#/components/schemas/Institution'
-                institution:
-                  $ref: '#/components/schemas/Institution'
-                institution_connection:
-                  type: string
-                  nullable: true
-                provider_connection:
-                  nullable: true
-                  allOf:
-                    - $ref: '#/components/schemas/ProviderConnection'
-              required:
-                - bank
-                - exchange
-                - institution
-                - institution_connection
-                - provider_connection
+          $ref: '#/components/schemas/HoldingsAccount'
       required:
         - id
         - crypto
@@ -883,7 +1293,181 @@ components:
         - display_unrealized_pnl
         - unrealized_pnl_percent
         - display_currency
-        - account
+    UserFondsEuro:
+      type: object
+      properties:
+        id:
+          type: integer
+        correlation_id:
+          type: string
+          nullable: true
+        name:
+          type: string
+        buying_price:
+          type: number
+        display_buying_price:
+          type: number
+          nullable: true
+        current_price:
+          type: number
+        display_current_price:
+          type: number
+        annual_yield:
+          type: number
+        current_value:
+          type: number
+        display_current_value:
+          type: number
+        unrealized_pnl:
+          type: number
+          nullable: true
+        display_unrealized_pnl:
+          type: number
+          nullable: true
+        unrealized_pnl_percent:
+          type: number
+          nullable: true
+        currency:
+          $ref: '#/components/schemas/Currency'
+        display_currency:
+          $ref: '#/components/schemas/Currency'
+        bank_account:
+          $ref: '#/components/schemas/HoldingsAccount'
+        account:
+          $ref: '#/components/schemas/HoldingsAccount'
+      required:
+        - id
+        - correlation_id
+        - name
+        - buying_price
+        - display_buying_price
+        - current_price
+        - display_current_price
+        - annual_yield
+        - current_value
+        - display_current_value
+        - unrealized_pnl
+        - display_unrealized_pnl
+        - unrealized_pnl_percent
+        - currency
+        - display_currency
+    UserSCPI:
+      type: object
+      properties:
+        id:
+          type: integer
+        correlation_id:
+          type: string
+        bought_at:
+          type: string
+          nullable: true
+        property_type:
+          type: string
+        dismemberment_month_period:
+          type: string
+          nullable: true
+        months_until_dismemberment_ends:
+          type: integer
+        scpi:
+          $ref: '#/components/schemas/SCPI'
+        current_value:
+          type: number
+        display_current_value:
+          type: number
+        unrealized_pnl:
+          type: number
+        display_unrealized_pnl:
+          type: number
+        unrealized_pnl_percent:
+          type: number
+        shares:
+          type: number
+        buying_price:
+          type: number
+        display_buying_price:
+          type: number
+        taxes:
+          type: number
+        display_taxes:
+          type: number
+        monthly_revenue:
+          type: number
+        display_monthly_revenue:
+          type: number
+        reimbursed_percent:
+          type: number
+          nullable: true
+        loans:
+          type: array
+          items: {}
+        bank_account:
+          $ref: '#/components/schemas/HoldingsAccount'
+        account:
+          $ref: '#/components/schemas/HoldingsAccount'
+      required:
+        - id
+        - correlation_id
+        - bought_at
+        - property_type
+        - dismemberment_month_period
+        - months_until_dismemberment_ends
+        - scpi
+        - current_value
+        - display_current_value
+        - unrealized_pnl
+        - display_unrealized_pnl
+        - unrealized_pnl_percent
+        - shares
+        - buying_price
+        - display_buying_price
+        - taxes
+        - display_taxes
+        - monthly_revenue
+        - display_monthly_revenue
+        - reimbursed_percent
+        - loans
+    UserSecurity:
+      type: object
+      properties:
+        id:
+          type: integer
+        correlation_id:
+          type: string
+          nullable: true
+        security:
+          $ref: '#/components/schemas/Security'
+        quantity:
+          type: number
+        current_value:
+          type: number
+        display_current_value:
+          type: number
+        unrealized_pnl:
+          type: number
+          nullable: true
+        display_unrealized_pnl:
+          type: number
+          nullable: true
+        unrealized_pnl_percent:
+          type: number
+          nullable: true
+        buying_price:
+          type: number
+        display_buying_price:
+          type: number
+          nullable: true
+      required:
+        - id
+        - correlation_id
+        - security
+        - quantity
+        - current_value
+        - display_current_value
+        - unrealized_pnl
+        - display_unrealized_pnl
+        - unrealized_pnl_percent
+        - buying_price
+        - display_buying_price
   parameters:
     BankAccountType:
       in: query
@@ -911,6 +1495,15 @@ components:
       name: name
       schema:
         type: string
+    HoldingsAccountType:
+      in: query
+      name: manual_type
+      required: false
+      schema:
+        type: string
+        enum:
+          - crypto
+          - stocks
     CryptoId:
       in: path
       name: CryptoId
@@ -1195,7 +1788,7 @@ paths:
                       result:
                         type: array
                         items:
-                          $ref: '#/components/schemas/SCPI'
+                          $ref: '#/components/schemas/SCPIResult'
   /securities/autocomplete:
     get:
       operationId: get_securities
@@ -1218,7 +1811,7 @@ paths:
                       result:
                         type: array
                         items:
-                          $ref: '#/components/schemas/Security'
+                          $ref: '#/components/schemas/SecurityResult'
   /users/me/cryptos:
     get:
       operationId: get_user_cryptos
@@ -1512,3 +2105,89 @@ paths:
       responses:
         '204':
           description: The generic asset was deleted successfully.
+  /users/me/holdings_accounts:
+    get:
+      operationId: get_user_holdings_accounts
+      tags:
+        - user
+      summary: Get the holdings accounts of the current user
+      description: Get the holdings accounts of the current user
+      parameters:
+        - $ref: '#/components/parameters/HoldingsAccountType'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponse'
+                  - type: object
+                    properties:
+                      result:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/HoldingsAccount'
+  /users/me/scpis:
+    get:
+      operationId: get_user_scpis
+      tags:
+        - user
+      summary: Get the SCPIs of the current user
+      description: Get the SCPIs of the current user
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponse'
+                  - type: object
+                    properties:
+                      result:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/UserSCPI'
+  /users/me/fonds_euro:
+    get:
+      operationId: get_user_fonds_euro
+      tags:
+        - user
+      summary: Get the Fonds Euro for the current user
+      description: Get the Fonds Euro for the current user
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponse'
+                  - type: object
+                    properties:
+                      result:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/UserFondsEuro'
+  /users/me/securities:
+    get:
+      operationId: get_user_securities
+      tags:
+        - user
+      summary: Get the Securities of the current user
+      description: Get the Securities of the current user
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponse'
+                  - type: object
+                    properties:
+                      result:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/UserSecurity'
