@@ -340,59 +340,6 @@ components:
           type: string
       required:
         - code
-    GenericAsset:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        updated_at:
-          type: string
-        category:
-          type: string
-          description: A Generic Asset Category as returned by the generic_asset_categories resource
-        quantity:
-          type: number
-        buying_price:
-          type: number
-        display_buying_price:
-          type: number
-        current_price:
-          type: number
-        display_current_price:
-          type: number
-        current_value:
-          type: number
-        display_current_value:
-          type: number
-        unrealized_pnl:
-          type: number
-        display_unrealized_pnl:
-          type: number
-        unrealized_pnl_percent:
-          type: number
-        display_currency:
-          $ref: '#/components/schemas/Currency'
-        currency:
-          $ref: '#/components/schemas/Currency'
-      required:
-        - id
-        - name
-        - updated_at
-        - category
-        - quantity
-        - buying_price
-        - display_buying_price
-        - current_price
-        - display_current_price
-        - current_value
-        - display_current_value
-        - unrealized_pnl
-        - display_unrealized_pnl
-        - unrealized_pnl_percent
-        - display_currency
-        - currency
     GenericAssetCategory:
       type: object
       properties:
@@ -421,6 +368,7 @@ components:
           nullable: true
         last_sync_at:
           type: string
+          nullable: true
         last_sync:
           type: string
           nullable: true
@@ -490,69 +438,18 @@ components:
         startups:
           type: array
           items:
-            type: object
-            properties:
-              id:
-                type: integer
-              provider_connection_id:
-                type: string
-              valuation:
-                type: number
-                nullable: true
-              multiple:
-                type: number
-              buying_value:
-                type: number
-              startup:
-                $ref: '#/components/schemas/StartupInfo'
-              shares:
-                type: number
-              buying_price:
-                type: number
-              display_buying_price:
-                type: number
-              user_estimated_price:
-                type: number
-              display_user_estimated_price:
-                type: number
-              current_value:
-                type: number
-              display_current_value:
-                type: number
-              unrealized_pnl:
-                type: number
-              display_unrealized_pnl:
-                type: number
-              unrealized_pnl_percent:
-                type: number
-              investments:
-                type: array
-                items:
-                  $ref: '#/components/schemas/StartupInvestment'
-              currency:
-                $ref: '#/components/schemas/Currency'
-              display_currency:
-                $ref: '#/components/schemas/Currency'
-            required:
-              - id
-              - provider_connection_id
-              - valuation
-              - multiple
-              - buying_value
-              - startup
-              - shares
-              - buying_price
-              - display_buying_price
-              - user_estimated_price
-              - display_user_estimated_price
-              - current_value
-              - display_current_value
-              - unrealized_pnl
-              - display_unrealized_pnl
-              - unrealized_pnl_percent
-              - investments
-              - currency
-              - display_currency
+            $ref: '#/components/schemas/UserStartup'
+        generic_assets:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserGenericAsset'
+        real_estates:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRealEstate'
+        user_precious_metals:
+          type: array
+          items: {}
       required:
         - slug
         - id
@@ -839,6 +736,32 @@ components:
         - unrealized_pnl
         - logo_url
         - sold
+    StartupFoundingRound:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: integer
+          nullable: true
+        currency:
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/CurrencyAdvanced'
+        value_usd:
+          type: integer
+          nullable: true
+        announced_at:
+          type: string
+        num_investors:
+          type: integer
+      required:
+        - name
+        - value
+        - currency
+        - value_usd
+        - announced_at
+        - num_investors
     StartupInvestment:
       type: object
       properties:
@@ -852,6 +775,7 @@ components:
           type: string
         valuation_type:
           type: string
+          nullable: true
         transaction_type:
           type: string
         share_type:
@@ -876,8 +800,10 @@ components:
           nullable: true
         state:
           type: string
+          nullable: true
         correlation_id:
           type: string
+          nullable: true
         discount:
           type: number
           nullable: true
@@ -887,8 +813,10 @@ components:
           type: number
         share_current_price:
           type: number
+          nullable: true
         display_share_current_price:
           type: number
+          nullable: true
         price_per_share:
           type: number
         display_price_per_share:
@@ -961,28 +889,6 @@ components:
         - unrealized_pnl
         - display_unrealized_pnl
         - unrealized_pnl_percent
-    StartupFoundingRound:
-      type: object
-      properties:
-        name:
-          type: string
-        value:
-          type: integer
-        currency:
-          $ref: '#/components/schemas/CurrencyAdvanced'
-        value_usd:
-          type: integer
-        announced_at:
-          type: string
-        num_investors:
-          type: integer
-      required:
-        - name
-        - value
-        - currency
-        - value_usd
-        - announced_at
-        - num_investors
     StartupInfo:
       type: object
       description: 'Information about a startup, independently from the user investment'
@@ -999,18 +905,23 @@ components:
             type: string
         founded_at:
           type: string
+          nullable: true
         labels:
           type: array
           items:
             type: string
         description:
           type: string
+          nullable: true
         country_name:
           type: string
+          nullable: true
         country_code:
           type: string
+          nullable: true
         website:
           type: string
+          nullable: true
         funding_rounds:
           type: array
           items:
@@ -1231,7 +1142,22 @@ components:
             - display_currency
         devices:
           type: array
-          items: {}
+          items:
+            type: object
+            properties:
+              device_id:
+                type: string
+              device_push_token:
+                type: string
+              expo_push_token:
+                type: string
+              is_notification_enabled:
+                type: boolean
+            required:
+              - device_id
+              - device_push_token
+              - expo_push_token
+              - is_notification_enabled
         has_bi_account:
           type: boolean
           nullable: true
@@ -1351,6 +1277,211 @@ components:
         - unrealized_pnl_percent
         - currency
         - display_currency
+    UserGenericAsset:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        updated_at:
+          type: string
+        category:
+          type: string
+          description: A Generic Asset Category as returned by the generic_asset_categories resource
+        quantity:
+          type: number
+        buying_price:
+          type: number
+        display_buying_price:
+          type: number
+        current_price:
+          type: number
+        display_current_price:
+          type: number
+        current_value:
+          type: number
+        display_current_value:
+          type: number
+        unrealized_pnl:
+          type: number
+        display_unrealized_pnl:
+          type: number
+        unrealized_pnl_percent:
+          type: number
+        display_currency:
+          $ref: '#/components/schemas/Currency'
+        currency:
+          $ref: '#/components/schemas/Currency'
+      required:
+        - id
+        - name
+        - updated_at
+        - category
+        - quantity
+        - buying_price
+        - display_buying_price
+        - current_price
+        - display_current_price
+        - current_value
+        - display_current_value
+        - unrealized_pnl
+        - display_unrealized_pnl
+        - unrealized_pnl_percent
+        - display_currency
+        - currency
+    UserRealEstate:
+      type: object
+      properties:
+        id:
+          type: integer
+        slug:
+          type: string
+        address_formatted:
+          type: string
+        category:
+          type: string
+        building_type:
+          type: string
+        description:
+          type: string
+        exceptional_asset:
+          type: boolean
+        last_sync_at:
+          type: string
+        surface_unit:
+          type: string
+        bought_at:
+          type: string
+        garden_area:
+          type: integer
+        balcony_area:
+          type: integer
+        floor_number:
+          type: integer
+          nullable: true
+        number_of_floors:
+          type: integer
+        number_of_bathrooms:
+          type: integer
+        number_of_rooms:
+          type: integer
+        garage_spaces:
+          type: integer
+        parking_spaces:
+          type: integer
+        general_condition:
+          type: integer
+        general_quality:
+          type: integer
+        kitchen_condition:
+          type: integer
+        kitchen_quality:
+          type: integer
+        bathrooms_condition:
+          type: integer
+        bathrooms_quality:
+          type: integer
+        windows_condition:
+          type: integer
+        windows_quality:
+          type: integer
+        flooring_condition:
+          type: integer
+        flooring_quality:
+          type: integer
+        building_period:
+          type: string
+        has_lift:
+          type: boolean
+          nullable: true
+        has_pool:
+          type: boolean
+        has_sauna:
+          type: boolean
+        is_new:
+          type: boolean
+        is_furnished:
+          type: boolean
+        buying_price:
+          type: number
+        display_buying_price:
+          type: number
+        current_price:
+          type: number
+        display_current_price:
+          type: number
+        current_value:
+          type: number
+        display_current_value:
+          type: number
+        unrealized_pnl:
+          type: number
+        display_unrealized_pnl:
+          type: number
+        unrealized_pnl_percent:
+          type: number
+        surface:
+          type: number
+        ownership_percentage:
+          type: number
+        user_estimated_value:
+          type: number
+          nullable: true
+        display_user_estimated_value:
+          type: number
+          nullable: true
+        reimbursed_percent:
+          type: number
+      required:
+        - id
+        - slug
+        - address_formatted
+        - category
+        - building_type
+        - description
+        - exceptional_asset
+        - last_sync_at
+        - surface_unit
+        - bought_at
+        - garden_area
+        - balcony_area
+        - floor_number
+        - number_of_floors
+        - number_of_bathrooms
+        - number_of_rooms
+        - garage_spaces
+        - parking_spaces
+        - general_condition
+        - general_quality
+        - kitchen_condition
+        - kitchen_quality
+        - bathrooms_condition
+        - bathrooms_quality
+        - windows_condition
+        - windows_quality
+        - flooring_condition
+        - flooring_quality
+        - building_period
+        - has_lift
+        - has_pool
+        - has_sauna
+        - is_new
+        - is_furnished
+        - buying_price
+        - display_buying_price
+        - current_price
+        - display_current_price
+        - current_value
+        - display_current_value
+        - unrealized_pnl
+        - display_unrealized_pnl
+        - unrealized_pnl_percent
+        - surface
+        - ownership_percentage
+        - user_estimated_value
+        - display_user_estimated_value
+        - reimbursed_percent
     UserSCPI:
       type: object
       properties:
@@ -1468,6 +1599,71 @@ components:
         - unrealized_pnl_percent
         - buying_price
         - display_buying_price
+    UserStartup:
+      type: object
+      properties:
+        id:
+          type: integer
+        provider_connection_id:
+          type: string
+          nullable: true
+        valuation:
+          type: number
+          nullable: true
+        multiple:
+          type: number
+        buying_value:
+          type: number
+        startup:
+          $ref: '#/components/schemas/StartupInfo'
+        shares:
+          type: number
+        buying_price:
+          type: number
+        display_buying_price:
+          type: number
+        user_estimated_price:
+          type: number
+        display_user_estimated_price:
+          type: number
+        current_value:
+          type: number
+        display_current_value:
+          type: number
+        unrealized_pnl:
+          type: number
+        display_unrealized_pnl:
+          type: number
+        unrealized_pnl_percent:
+          type: number
+        investments:
+          type: array
+          items:
+            $ref: '#/components/schemas/StartupInvestment'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        display_currency:
+          $ref: '#/components/schemas/Currency'
+      required:
+        - id
+        - provider_connection_id
+        - valuation
+        - multiple
+        - buying_value
+        - startup
+        - shares
+        - buying_price
+        - display_buying_price
+        - user_estimated_price
+        - display_user_estimated_price
+        - current_value
+        - display_current_value
+        - unrealized_pnl
+        - display_unrealized_pnl
+        - unrealized_pnl_percent
+        - investments
+        - currency
+        - display_currency
   parameters:
     BankAccountType:
       in: query
@@ -2005,7 +2201,7 @@ paths:
                       result:
                         type: array
                         items:
-                          $ref: '#/components/schemas/GenericAsset'
+                          $ref: '#/components/schemas/UserGenericAsset'
     post:
       operationId: add_user_generic_asset
       tags:
@@ -2046,7 +2242,7 @@ paths:
                   - type: object
                     properties:
                       result:
-                        $ref: '#/components/schemas/GenericAsset'
+                        $ref: '#/components/schemas/UserGenericAsset'
   '/users/me/generic_assets/{GenericAssetId}':
     get:
       operationId: get_user_generic_asset
@@ -2067,7 +2263,7 @@ paths:
                   - type: object
                     properties:
                       result:
-                        $ref: '#/components/schemas/GenericAsset'
+                        $ref: '#/components/schemas/UserGenericAsset'
     put:
       operationId: update_user_generic_asset
       tags:
@@ -2081,7 +2277,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GenericAsset'
+              $ref: '#/components/schemas/UserGenericAsset'
       responses:
         '200':
           description: The generic asset was updated successfully.
@@ -2093,7 +2289,7 @@ paths:
                   - type: object
                     properties:
                       result:
-                        $ref: '#/components/schemas/GenericAsset'
+                        $ref: '#/components/schemas/UserGenericAsset'
     delete:
       operationId: delete_user_generic_asset
       tags:
