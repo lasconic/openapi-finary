@@ -18,6 +18,7 @@ properties:
     nullable: true
   last_sync_at:
     type: string
+    nullable: true
   last_sync:
     type: string
     nullable: true
@@ -54,7 +55,7 @@ properties:
   unrealized_pnl_percent:
     type: number
     nullable: true
-  
+
   bank:
     $ref: "./Institution.yaml"
   exchange:
@@ -70,7 +71,6 @@ properties:
     allOf:
       - $ref: "./ProviderConnection.yaml"
 
-
   cryptos:
     type: array
     items:
@@ -85,13 +85,23 @@ properties:
       $ref: "./UserSCPI.yaml"
   fonds_euro:
     type: array
-    items: 
+    items:
       $ref: "./UserFondsEuro.yaml"
   startups:
     type: array
     items:
       $ref: "./UserStartup.yaml"
-
+  generic_assets:
+    type: array
+    items:
+      $ref: "./UserGenericAsset.yaml"
+  real_estates:
+    type: array
+    items:
+      $ref: "./UserRealEstate.yaml"
+  user_precious_metals:
+    type: array
+    items: {}
 
 required:
   - slug

@@ -17,7 +17,7 @@ get:
               - type: object
                 properties:
                   result:
-                    $ref: "../schemas/GenericAsset.yaml"
+                    $ref: "../schemas/UserGenericAsset.yaml"
 put:
   operationId: update_user_generic_asset
   tags:
@@ -31,7 +31,7 @@ put:
     content:
       application/json:
         schema:
-          $ref: "../schemas/GenericAsset.yaml" # note: (InputGenericAsset + id) is used by the UI but a full object works too
+          $ref: "../schemas/UserGenericAsset.yaml" # note: (InputGenericAsset + id) is used by the UI but a full object works too
   responses:
     "200":
       description: The generic asset was updated successfully.
@@ -43,7 +43,7 @@ put:
               - type: object
                 properties:
                   result:
-                    $ref: "../schemas/GenericAsset.yaml"
+                    $ref: "../schemas/UserGenericAsset.yaml"
 
 delete:
   operationId: delete_user_generic_asset

@@ -4,10 +4,14 @@ properties:
     type: string
   value:
     type: integer
+    nullable: true
   currency:
-    $ref: "./CurrencyAdvanced.yaml"
+    nullable: true
+    allOf:
+      - $ref: "./CurrencyAdvanced.yaml"
   value_usd:
     type: integer
+    nullable: true
   announced_at:
     type: string
   num_investors:

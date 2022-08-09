@@ -10,6 +10,8 @@ properties:
     type: string
   valuation_type:
     type: string
+    nullable: true
+    # null, pre,
   transaction_type:
     type: string
   share_type:
@@ -34,8 +36,10 @@ properties:
     nullable: true
   state:
     type: string
+    nullable: true
   correlation_id:
     type: string
+    nullable: true
   discount:
     type: number
     nullable: true
@@ -45,8 +49,10 @@ properties:
     type: number
   share_current_price:
     type: number
+    nullable: true
   display_share_current_price:
     type: number
+    nullable: true
   price_per_share:
     type: number
   display_price_per_share:

@@ -17,7 +17,7 @@ get:
                   result:
                     type: array
                     items:
-                      $ref: "../schemas/GenericAsset.yaml"
+                      $ref: "../schemas/UserGenericAsset.yaml"
 post:
   operationId: add_user_generic_asset
   tags:
@@ -41,4 +41,4 @@ post:
               - type: object
                 properties:
                   result:
-                    $ref: "../schemas/GenericAsset.yaml"
+                    $ref: "../schemas/UserGenericAsset.yaml"

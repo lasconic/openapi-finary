@@ -4,6 +4,7 @@ properties:
     type: integer
   provider_connection_id:
     type: string
+    nullable: true
   valuation:
     type: number
     nullable: true

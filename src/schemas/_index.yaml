@@ -26,8 +26,6 @@ DistributionShareValue:
   $ref: "./DistributionShareValue.yaml"
 Error:
   $ref: "./Error.yaml"
-GenericAsset:
-  $ref: "./GenericAsset.yaml"
 GenericAssetCategory:
   $ref: "./GenericAssetCategory.yaml"
 HoldingsAccount:
@@ -54,10 +52,10 @@ SecurityType:
   $ref: "./SecurityType.yaml"
 Startup:
   $ref: "./Startup.yaml"
-StartupInvestment:
-  $ref: "./StartupInvestment.yaml"
 StartupFoundingRound:
   $ref: "./StartupFundingRound.yaml"
+StartupInvestment:
+  $ref: "./StartupInvestment.yaml"
 StartupInfo:
   $ref: "./StartupInfo.yaml"
 User:
@@ -66,7 +64,13 @@ UserCrypto:
   $ref: "./UserCrypto.yaml"
 UserFondsEuro:
   $ref: "./UserFondsEuro.yaml"
+UserGenericAsset:
+  $ref: "./UserGenericAsset.yaml"
+UserRealEstate:
+  $ref: "./UserRealEstate.yaml"
 UserSCPI:
   $ref: "./UserSCPI.yaml"
 UserSecurity:
   $ref: "./UserSecurity.yaml"
+UserStartup:
+  $ref: "./UserStartup.yaml"

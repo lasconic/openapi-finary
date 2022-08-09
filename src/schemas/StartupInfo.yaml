@@ -13,18 +13,23 @@ properties:
       type: string
   founded_at:
     type: string
+    nullable: true
   labels:
     type: array
     items:
       type: string
   description:
     type: string
+    nullable: true
   country_name:
     type: string
+    nullable: true
   country_code:
     type: string
+    nullable: true
   website:
     type: string
+    nullable: true
   funding_rounds:
     type: array
     items:

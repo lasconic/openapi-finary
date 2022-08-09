@@ -1,0 +1,151 @@
+type: object
+properties:
+  id:
+    type: integer
+  slug:
+    type: string
+  address_formatted:
+    type: string
+  category:
+    type: string
+  building_type:
+    type: string
+  description:
+    type: string
+  exceptional_asset:
+    type: boolean
+  last_sync_at:
+    type: string
+  surface_unit:
+    type: string
+  bought_at:
+    type: string
+  garden_area:
+    type: integer
+  balcony_area:
+    type: integer
+  floor_number:
+    type: integer
+    nullable: true
+  number_of_floors:
+    type: integer
+  number_of_bathrooms:
+    type: integer
+  number_of_rooms:
+    type: integer
+  garage_spaces:
+    type: integer
+  parking_spaces:
+    type: integer
+  general_condition:
+    type: integer
+  general_quality:
+    type: integer
+  kitchen_condition:
+    type: integer
+  kitchen_quality:
+    type: integer
+  bathrooms_condition:
+    type: integer
+  bathrooms_quality:
+    type: integer
+  windows_condition:
+    type: integer
+  windows_quality:
+    type: integer
+  flooring_condition:
+    type: integer
+  flooring_quality:
+    type: integer
+  building_period:
+    type: string
+  has_lift:
+    type: boolean
+    nullable: true
+  has_pool:
+    type: boolean
+  has_sauna:
+    type: boolean
+  is_new:
+    type: boolean
+  is_furnished:
+    type: boolean
+  buying_price:
+    type: number
+  display_buying_price:
+    type: number
+  current_price:
+    type: number
+  display_current_price:
+    type: number
+  current_value:
+    type: number
+  display_current_value:
+    type: number
+  unrealized_pnl:
+    type: number
+  display_unrealized_pnl:
+    type: number
+  unrealized_pnl_percent:
+    type: number
+  surface:
+    type: number
+  ownership_percentage:
+    type: number
+  user_estimated_value:
+    type: number
+    nullable: true
+  display_user_estimated_value:
+    type: number
+    nullable: true
+  reimbursed_percent:
+    type: number
+required:
+  - id
+  - slug
+  - address_formatted
+  - category
+  - building_type
+  - description
+  - exceptional_asset
+  - last_sync_at
+  - surface_unit
+  - bought_at
+  - garden_area
+  - balcony_area
+  - floor_number
+  - number_of_floors
+  - number_of_bathrooms
+  - number_of_rooms
+  - garage_spaces
+  - parking_spaces
+  - general_condition
+  - general_quality
+  - kitchen_condition
+  - kitchen_quality
+  - bathrooms_condition
+  - bathrooms_quality
+  - windows_condition
+  - windows_quality
+  - flooring_condition
+  - flooring_quality
+  - building_period
+  - has_lift
+  - has_pool
+  - has_sauna
+  - is_new
+  - is_furnished
+  - buying_price
+  - display_buying_price
+  - current_price
+  - display_current_price
+  - current_value
+  - display_current_value
+  - unrealized_pnl
+  - display_unrealized_pnl
+  - unrealized_pnl_percent
+  - surface
+  - ownership_percentage
+  - user_estimated_value
+  - display_user_estimated_value
+  - reimbursed_percent

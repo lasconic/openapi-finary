@@ -91,8 +91,8 @@ properties:
         state:
           type: string
       required:
-      - step
-      - state
+        - step
+        - state
   is_onboarding_completed:
     type: boolean
     nullable: true
@@ -109,8 +109,8 @@ properties:
         crypto_exchange_slug:
           type: string
       required:
-      - id
-      - crypto_exchange_slug
+        - id
+        - crypto_exchange_slug
   investor_profile:
     type: object
     properties:
@@ -124,10 +124,10 @@ properties:
         type: number
         nullable: true
     required:
-    - has_clicked_opportunities
-    - monthly_expenses
-    - annual_salary
-    - income_tax_rate
+      - has_clicked_opportunities
+      - monthly_expenses
+      - annual_salary
+      - income_tax_rate
   ui_configuration:
     type: object
     properties:
@@ -156,8 +156,8 @@ properties:
           monthly_contribution:
             type: string
         required:
-        - duration
-        - monthly_contribution
+          - duration
+          - monthly_contribution
       has_filled_invest_form:
         type: boolean
       period_display_mode:
@@ -178,31 +178,46 @@ properties:
           logo_url:
             type: string
         required:
-        - id
-        - name
-        - code
-        - symbol
-        - correlation_id
-        - logo_url
+          - id
+          - name
+          - code
+          - symbol
+          - correlation_id
+          - logo_url
     required:
-    - information_banner_seen_version
-    - wealth_display_mode
-    - display_language
-    - display_new_webapp_modal
-    - is_crypto_currency_display_enabled
-    - has_seen_free_referral_modal
-    - has_seen_download_app_modal
-    - financial_projection_parameters
-    - has_filled_invest_form
-    - period_display_mode
-    - display_currency
+      - information_banner_seen_version
+      - wealth_display_mode
+      - display_language
+      - display_new_webapp_modal
+      - is_crypto_currency_display_enabled
+      - has_seen_free_referral_modal
+      - has_seen_download_app_modal
+      - financial_projection_parameters
+      - has_filled_invest_form
+      - period_display_mode
+      - display_currency
   devices:
     type: array
-    items: {}
+    items:
+      type: object
+      properties:
+        device_id:
+          type: string
+        device_push_token:
+          type: string
+        expo_push_token:
+          type: string
+        is_notification_enabled:
+          type: boolean
+      required:
+        - device_id
+        - device_push_token
+        - expo_push_token
+        - is_notification_enabled
   has_bi_account:
     type: boolean
     nullable: true
 required:
-- slug
-- email
-- created_at
+  - slug
+  - email
+  - created_at
