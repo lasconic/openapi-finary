@@ -22,7 +22,7 @@
   "homepage": "https://github.com/lasconic/openapi-finary#readme",
   "dependencies": {
     "@apidevtools/swagger-cli": "^4.0.4",
-    "@stoplight/spectral-cli": "^6.6.0",
+    "@stoplight/spectral-cli": "^6.8.0",
     "redoc-cli": "^0.13.20"
   }
 }
